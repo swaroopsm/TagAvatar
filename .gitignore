@@ -6,3 +6,5 @@ bin
 *.jar
 *.war
 *.ear
+
+.classpath
