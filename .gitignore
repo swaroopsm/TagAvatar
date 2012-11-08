@@ -8,4 +8,4 @@ bin
 *.ear
 
 .classpath
-settings.java
+Settings.java
