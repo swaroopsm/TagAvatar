@@ -47,6 +47,9 @@
               <li><a href="#about">About</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="nav pull-right">
+             	<a href="/login"><button class="btn btn-success" style="font-size: 13px;">Login</button></a> &nbsp; <a href="/signup" style="font-size: 11px;color: #888;">New Account?</a>
+             </div>
           </div><!--/.nav-collapse -->
         </div>
       </div>
