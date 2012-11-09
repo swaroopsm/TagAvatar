@@ -60,6 +60,16 @@
 <br>
 		<center>
 		<div class="well">
+				<%
+					try{
+						String msg=request.getAttribute("msg").toString();
+						if(msg.equals("error")){
+							out.println("<span class='alert alert-danger span5' style='margin-left: 25%;'><a class='close' data-dismiss='alert' href='#'>&times;</a>Login Failed...</span>");
+						}
+					}catch(Exception e){
+						
+					}
+				%>
 			<center><form id="login_form" class="form" method="POST" action="login">
 				<legend>Login!</legend>
 				<div class="control-group">
