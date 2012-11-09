@@ -2023,3 +2023,23 @@
 
 
 }(window.jQuery);
+
+/**
+ * Custom JS
+ */
+$("form#signup_form").live("submit", function(){
+	var name=$("#inputName").val();
+	var email=$("#inputEmail").val();
+	var username=$("#inputUsername").val();
+	var pwd=$("#inputPassword").val();
+	if(name=='' || email=='' || username=='' || pwd==''){
+		$("#js-messages").html("<br><center><span style='margin-left: 25%;' class='span5 alert alert-danger'><a class='close' data-dismiss='alert' href='#'>&times;</a>Please fill all fields...</span></center>").hide().fadeIn(500);
+	}else{
+		$.post("/TagAvatar/signup", {name: name, email: email, username: username, password: pwd},
+				function(data){
+					console.log(data);
+		});
+	}
+	return false;
+});
+
