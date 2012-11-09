@@ -32,7 +32,7 @@ public class Users {
 			Statement st=s.get_connection().createStatement();
 			//Statement st=s.get_connection().createStatement(sql);
 			st.executeUpdate(sql);
-			return "Success....";
+			return "User added successfully!";
 		}catch(SQLException e){
 			return e.getMessage();
 		}catch(NoSuchAlgorithmException e2){
