@@ -16,12 +16,16 @@ public class default_settings {
 	private String mysql_url="jdbc:mysql://localhost:3306/"+mysql_db;
 	private Connection con;
 	
-	public void test(){
+	public default_settings(){
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			con=DriverManager.getConnection(this.mysql_url,this.mysql_username,this.mysql_password);
+			this.con=DriverManager.getConnection(this.mysql_url,this.mysql_username,this.mysql_password);
 		}catch(Exception e){
 			
 		}
+	}
+	
+	public Connection get_connection(){
+		return this.con;
 	}
 }
