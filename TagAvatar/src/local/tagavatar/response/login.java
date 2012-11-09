@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import local.tagavatar.server.Session;
 
@@ -47,6 +48,12 @@ public class login extends HttpServlet {
 			RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
 			request.setAttribute("msg", "error");
 			rd.forward(request, response);
+		}
+		if(stat=="1"){
+			HttpSession se=request.getSession();
+			se.setAttribute("loggedin", true);
+			se.setAttribute("username", username);
+			response.sendRedirect("user.jsp");
 		}
 	}
 
