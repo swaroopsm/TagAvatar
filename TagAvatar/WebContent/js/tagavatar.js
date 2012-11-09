@@ -2037,7 +2037,7 @@ $("form#signup_form").live("submit", function(){
 	}else{
 		$.post("/TagAvatar/signup", {name: name, email: email, username: username, password: pwd},
 				function(data){
-					console.log(data);
+			$("#js-messages").html("<br><center><span style='margin-left: 25%;' class='span5 alert alert-success'><a class='close' data-dismiss='alert' href='#'>&times;</a>"+data+"</span></center>").hide().fadeIn(500);
 		});
 	}
 	return false;
