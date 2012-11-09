@@ -84,7 +84,7 @@
 				</div>
 				<div class="control-group">
 					<div class="controls">
-						<button type="submit" class="btn btn-success">Start Cracking &raquo;</button>
+						<button type="submit" class="btn btn-success">Signup &raquo;</button>
 						<div><img id="loader" style="margin-top: 10px;display: none;" src="img/loader.gif" /></div>
 					</div>
 				</div>
