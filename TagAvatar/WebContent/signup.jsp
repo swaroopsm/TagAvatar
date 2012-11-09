@@ -96,5 +96,19 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery.js"></script>
+	<script>
+		$("form#signup_form").live("submit", function(){
+			var name=$("#inputName").val();
+			var email=$("#inputEmail").val();
+			var username=$("#inputUsername").val();
+			var pwd=$("#inputPassword").val();
+			//console.log(name);
+			$.post("/TagAvatar/signup", {name: name, email: email, username: username, password: pwd},
+					function(data){
+						console.log(data);
+			});
+			return false;
+		});
+	</script>
   </body>
 </html>
