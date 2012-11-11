@@ -72,7 +72,16 @@
     <div class="container">
 
 <br>
-		<h1>Hey!</h1>
+		<div class="rows">
+			<div class="span6" style="width: 400px;height: 400px;">
+				<a href="#" title="Most Recent Photo"><img src="http://placehold.it/400x400" class="thumbnail" /></a>
+			</div>
+			<div class="span5 well" style="margin-left: 40px;">
+				<h4>Photo Title</h4>
+				<hr class="adjust">
+				<p>Photo Description...</p>
+			</div>
+		</div>
     </div> <!-- /container -->
 
     <!-- Le javascript
