@@ -11,6 +11,7 @@
 
     <!-- Le styles -->
     <link href="css/tagavatar.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -53,6 +54,14 @@
               		<input type="text" class="search-query span2" placeholder="Search" >
            		</form>
           	 </li>
+          	 <li class="divider-vertical"></li>
+          	  <li>
+          	  	<a href="#" style="position: relative; padding-top: 12px;" title="Add a Photo!">
+	          	  	<div style="font-size: 20px;">
+	  					<i class="icon-camera icon-white" style="background-position: 30px;"></i>
+					</div>
+				</a>
+          	  </li>
              <li class="divider-vertical"></li>
              <li class="dropdown">
           	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 13px;"><% out.println(session.getAttribute("username")); %><b class="caret"></b></a>
