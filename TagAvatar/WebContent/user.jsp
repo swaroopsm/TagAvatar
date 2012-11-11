@@ -46,13 +46,13 @@
           </a>
           <a class="brand" href="#">TagAvatar</a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
           </div><!--/.nav-collapse -->
-          <ul class="nav pull-right" style="margin-top: -40px;">
+          <ul class="nav pull-right">
+          	 <li>
+          	 	<form class="navbar-search pull-right" action="" style="//margin-left: 250px;">
+              		<input type="text" class="search-query span2" placeholder="Search" >
+           		</form>
+          	 </li>
              <li class="divider-vertical"></li>
              <li class="dropdown">
           	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 13px;"><% out.println(session.getAttribute("username")); %><b class="caret"></b></a>
@@ -72,7 +72,7 @@
     <div class="container">
 
 <br>
-		
+		<h1>Hey!</h1>
     </div> <!-- /container -->
 
     <!-- Le javascript
