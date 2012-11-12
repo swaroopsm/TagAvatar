@@ -70,7 +70,7 @@
                 <li><a href="/profile">Profile</a></li>
                 <li><a href="#">Messages</a></li>
                 <li class="divider"></li>
-                <li><a href="/logout">Log out!</a></li>
+                <li><a href="logout">Log out!</a></li>
               </ul>
              </li>
           </ul>
