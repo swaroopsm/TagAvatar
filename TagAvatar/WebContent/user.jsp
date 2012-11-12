@@ -56,7 +56,7 @@
           	 </li>
           	 <li class="divider-vertical"></li>
           	  <li>
-          	  	<a href="#" style="position: relative; padding-top: 12px;" title="Add a Photo!">
+          	  	<a href="#photoModal" data-toggle="modal" style="position: relative; padding-top: 12px;" title="Add a Photo!" >
 	          	  	<div style="font-size: 20px;">
 	  					<i class="icon-camera icon-white" style="background-position: 30px;"></i>
 					</div>
@@ -94,6 +94,39 @@
 				<hr>
 			</div>
 		</div>
+		
+		<!-- Photo Modal -->
+			<div id="photoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			    <h3 id="photoModalLabel">Add new photo</h3>
+			  </div>
+			   <form class="form-horizontal" id="photoUploadForm" method="POST" action="">
+			  <div class="modal-body">
+				  <div class="control-group">
+				    <div class="controls">
+				      <input type="text" id="photoTitle" name="photoTitle" placeholder="Title">
+				    </div>
+				  </div>
+				  <div class="control-group">
+				    <div class="controls">
+				      <textarea rows="4" class="span3" id="photoDesc" name="photoDesc" placeholder="Description"></textarea>
+				    </div>
+				  </div>
+				  <div class="control-group">
+				    <div class="controls">
+				      <input type="file" id="photoFile" name="photoFile">
+				    </div>
+				  </div>
+			  </div>
+			  <div class="modal-footer">
+			    <button type="submit" class="btn btn-success">Upload Photo &raquo;</button>
+			  </div>
+			  </form>
+			</div>
+		<!-- End Photo Modal -->
+		
+		
     </div> <!-- /container -->
 
     <!-- Le javascript
