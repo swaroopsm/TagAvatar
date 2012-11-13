@@ -37,7 +37,7 @@ public class PhotoUpload extends HttpServlet {
 
    public void init( ){
       // Get the file location where it would be stored.
-      filePath =  getServletContext().getInitParameter("file-upload"); 
+      filePath =  getServletContext().getInitParameter("img-upload"); 
       thumbPath = getServletContext().getInitParameter("img-upload-thumb");    
    }
    public void doPost(HttpServletRequest request, 
