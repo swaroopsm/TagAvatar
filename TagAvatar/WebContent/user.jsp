@@ -101,7 +101,7 @@
 			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			    <h3 id="photoModalLabel">Add new photo</h3>
 			  </div>
-			   <form class="form-horizontal" id="photoUploadForm" method="POST" action="">
+			   <form class="form-horizontal" id="photoUploadForm" method="POST" action="PhotoUpload">
 			  <div class="modal-body">
 				  <div class="control-group">
 				    <div class="controls">
@@ -115,12 +115,12 @@
 				  </div>
 				  <div class="control-group">
 				    <div class="controls">
-				      <input type="file" id="photoFile" name="photoFile">
+				      <input type="file" id="file" name="file">
 				    </div>
 				  </div>
 			  </div>
 			  <div class="modal-footer">
-			    <button type="submit" class="btn btn-success">Upload Photo &raquo;</button>
+			    <button type="submit" class="btn btn-success" id="uploadPhotoButton">Upload Photo &raquo;</button>
 			  </div>
 			  </form>
 			</div>
@@ -133,6 +133,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery.js"></script>
+	<script src="js/jquery.form.js"></script>
 	<script src="js/tagavatar.js"></script>
 	<%
 		}
