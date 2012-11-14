@@ -31,7 +31,7 @@
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
   </head>
 
-  <body>
+  <body class="body_background">
 	<%
 		try{
 			if(session.getAttribute("loggedin").toString().equals("true")){
@@ -78,20 +78,20 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container user_dashboard">
 
 <br>
 		<div class="rows">
 			<div class="span6">
 				<a href="#" title="Most Recent Photo"><img src="http://placehold.it/400x400"  style="width: 400px;height: 400px;" class="thumbnail" /></a>
 			</div>
-			<div class="span5 well" style="margin-left: 40px;">
+			<div class="span5 well">
 				<h4>Photo Title</h4>
 				<hr class="adjust">
 				<p>Photo Description...</p>
 			</div>
 			<div class="span12">
-				<hr>
+				<hr style="width: 900px;">
 			</div>
 		</div>
 		
