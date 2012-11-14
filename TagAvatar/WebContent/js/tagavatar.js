@@ -2050,7 +2050,11 @@
 				$("#photoUploadForm").ajaxForm({
 					success: function(data){
 						var obj=jQuery.parseJSON(data);
-						console.log(obj.stat);
+						if(obj.stat){
+							$("#afterUpload").html("<center><span class='span6 alert alert-success'>Photo added successfully...</span><br><br><br><img src='/images/thumbnails/"+obj.pic+"' class='thumbnail'></img></center>").hide();
+							$("#photoUploadForm").hide();
+							$("#afterUpload").fadeIn(500);
+						}
 					}
 				}).submit();
 		return false;
