@@ -101,6 +101,7 @@
 			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			    <h3 id="photoModalLabel">Add new photo</h3>
 			  </div>
+			   <div class="modal-body" id="afterUpload" style="display: none;"></div>
 			   <form class="form-horizontal" id="photoUploadForm" method="POST" action="PhotoUpload" enctype="multipart/form-data">
 			  <div class="modal-body">
 				  <div class="control-group">
