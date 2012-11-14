@@ -122,6 +122,7 @@
 			  </div>
 			  <div class="modal-footer">
 			    <input type="submit" class="btn btn-success" id="uploadPhotoButton" value="Upload Photo &raquo;" />
+			    <center><div id="loader" style="display: none;"><img src="img/loader.gif" style="position: absolute;"/></div></center>
 			  </div>
 			  </form>
 			</div>
