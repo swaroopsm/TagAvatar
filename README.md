@@ -5,6 +5,7 @@ A photo management application
 
 
 ###Dependencies:
+
 [Apache Commons Codec]('http://commons.apache.org/codec/')
 
 [Apache Commons Fileupload](http://commons.apache.org/fileupload/download_fileupload.cgi)
