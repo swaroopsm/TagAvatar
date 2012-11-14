@@ -2047,6 +2047,7 @@
 	});
 	
 	$("#photoModalLink").live("click", function(){
+		$("#loader").hide();
 		$("#afterUpload").hide();
 		$("#photoUploadForm").show();
 		$("#photoModal").modal('show');
@@ -2054,6 +2055,7 @@
 	});
 	
 	$("#uploadPhotoButton").click(function(){
+				$("#loader").show();
 				$("#photoUploadForm").ajaxForm({
 					success: function(data){
 						var obj=jQuery.parseJSON(data);
