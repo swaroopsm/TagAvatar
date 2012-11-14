@@ -2046,6 +2046,13 @@
 		return false;
 	});
 	
+	$("#photoModalLink").live("click", function(){
+		$("#afterUpload").hide();
+		$("#photoUploadForm").show();
+		$("#photoModal").modal('show');
+		return false;
+	});
+	
 	$("#uploadPhotoButton").click(function(){
 				$("#photoUploadForm").ajaxForm({
 					success: function(data){
@@ -2054,6 +2061,7 @@
 							$("#afterUpload").html("<center><span class='span6 alert alert-success'>Photo added successfully...</span><br><br><br><img src='/images/thumbnails/"+obj.pic+"' class='thumbnail'></img></center>").hide();
 							$("#photoUploadForm").hide();
 							$("#afterUpload").fadeIn(500);
+							$("#photoUploadForm")[0].reset();
 						}
 					}
 				}).submit();
