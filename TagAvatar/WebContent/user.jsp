@@ -56,7 +56,7 @@
           	 </li>
           	 <li class="divider-vertical"></li>
           	  <li>
-          	  	<a href="#photoModal" data-toggle="modal" style="position: relative; padding-top: 12px;" title="Add a Photo!" >
+          	  	<a href="#photoModal" id="photoModalLink" data-toggle="modal" style="position: relative; padding-top: 12px;" title="Add a Photo!" >
 	          	  	<div style="font-size: 20px;">
 	  					<i class="icon-camera icon-white" style="background-position: 30px;"></i>
 					</div>
