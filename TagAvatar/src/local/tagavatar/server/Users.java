@@ -12,6 +12,7 @@ import javax.sql.*;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.mysql.jdbc.PreparedStatement;
+import org.json.*;
 
 public class Users {
 	
@@ -42,6 +43,25 @@ public class Users {
 		}
 	}
 	
-	
+	public String view(String my_username, String username){
+		try{
+			String sql="SELECT users.name,users.email,users.bio,users.url,users.location,following.username,following.following FROM users,following WHERE (users.username=following.following AND following.following='"+username+"' AND following.username='"+my_username+"')";
+			Statement st=this.con.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			JSONObject json=new JSONObject();
+			while(rs.next()){
+				json.put("name", rs.getString("name"));
+				json.put("email", rs.getString("email"));
+				json.put("bio", rs.getString("bio"));
+				json.put("my_username", rs.getString("username"));
+				json.put("username", rs.getString("following"));
+				json.put("url", rs.getString("url"));
+				json.put("location", rs.getString("location"));
+			}
+			return json.toString();
+		}catch(Exception e){
+			return null;
+		}
+	}
 	
 }
