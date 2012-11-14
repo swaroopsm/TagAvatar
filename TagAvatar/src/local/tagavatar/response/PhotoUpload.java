@@ -1,61 +1,59 @@
 package local.tagavatar.response;
 
 import java.awt.Image;
+import org.json.JSONObject;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.security.Timestamp;
 import java.util.*;
-
 import javax.imageio.ImageIO;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.util.Date;
 import org.imgscalr.Scalr;
- 
 import org.apache.commons.*;
-//import org.apache.commons.fileupload.FileUploadException;
-//import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-//import org.apache.commons.fileupload.servlet.ServletFileUpload;
-//import org.apache.commons.io.output.*;
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import sun.org.mozilla.javascript.json.JsonParser;
+import local.tagavatar.server.Photos;
 
 public class PhotoUpload extends HttpServlet {
    
-   private boolean isMultipart;
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private boolean isMultipart;
    private String filePath;
    private String thumbPath;
    private int maxFileSize = 1000 * 1024;
    private int maxMemSize = 4 * 1024;
    private File file ;
-
+   
+   public PhotoUpload() {
+       super();
+       // TODO Auto-generated constructor stub
+   }
+   
    public void init( ){
       // Get the file location where it would be stored.
       filePath =  getServletContext().getInitParameter("img-upload"); 
       thumbPath = getServletContext().getInitParameter("img-upload-thumb");    
    }
-   public void doPost(HttpServletRequest request, 
-               HttpServletResponse response)
-              throws ServletException, java.io.IOException {
+   protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, java.io.IOException {
       // Check that we have a file upload request
+	  java.io.PrintWriter out = response.getWriter( );
       isMultipart = ServletFileUpload.isMultipartContent(request);
-      response.setContentType("text/html");
-      java.io.PrintWriter out = response.getWriter( );
       if( !isMultipart ){
-         out.println("<html>");
-         out.println("<head>");
-         out.println("<title>Servlet upload</title>");  
-         out.println("</head>");
-         out.println("<body>");
-         out.println("<p>No file uploaded</p>"); 
-         out.println("</body>");
-         out.println("</html>");
+         
          return;
       }
       DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -68,7 +66,10 @@ public class PhotoUpload extends HttpServlet {
       ServletFileUpload upload = new ServletFileUpload(factory);
       // maximum file size to be uploaded.
       upload.setSizeMax( maxFileSize );
-
+      String fname=null;
+      String ext=null;
+      String val[]=new String[2];
+      int c=0;
       try{ 
       // Parse the request to get file items.
       List fileItems = upload.parseRequest(request);
@@ -89,8 +90,8 @@ public class PhotoUpload extends HttpServlet {
             long sizeInBytes = fi.getSize();
             // Write the file
             int mid= fileName.lastIndexOf(".");
-            String fname=fileName.substring(0,mid);
-            String ext=fileName.substring(mid+1,fileName.length());
+            fname=fileName.substring(0,mid);
+            ext=fileName.substring(mid+1,fileName.length());
             Date d=new Date();
             fname=fname+d.getTime();
             fname=DigestUtils.md5Hex(fname);
@@ -98,16 +99,36 @@ public class PhotoUpload extends HttpServlet {
             fi.write(file);
             BufferedImage image=ImageIO.read(new File(filePath + fname+"."+ext));
             BufferedImage thumbnail=Scalr.resize(image, 180);
-            File thumb=new File(thumbPath + fname + "_thumb." + ext);
+            File thumb=new File(thumbPath + fname + "." + ext);
             ImageIO.write(thumbnail, ext, thumb);
-            out.println(fname+"."+ext);
          }
+         else{
+        	 if(c<2){
+        		 val[c]=fi.getString().toString();
+            	 c++;
+        	 }
+         }
+      }
+      HttpSession se=request.getSession();
+      Photos p=new Photos();
+      response.setContentType("text/html");
+      JSONObject json=new JSONObject();
+      if(p.create(val[0], val[1], fname+"."+ext, (String) se.getAttribute("username"))){
+    	  json.put("stat", true);
+    	  json.put("pic", fname+"."+ext);
+    	  out.println(json.toString());
+      }
+      else{
+    	  json.put("stat", false);
+    	  out.println(json.toString());
       }
    }catch(Exception ex) {
        System.out.println(ex);
    }
+      
    }
-   public void doGet(HttpServletRequest request, 
+   
+   protected void doGet(HttpServletRequest request, 
                        HttpServletResponse response)
         throws ServletException, java.io.IOException {
         
