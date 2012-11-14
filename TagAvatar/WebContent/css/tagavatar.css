@@ -5772,3 +5772,15 @@ a.badge:hover {
 .affix {
   position: fixed;
 }
+
+.user_dashboard{
+	background-color: #fff;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+}
+
+.body_background{
+	background-color: #262920;
+}
