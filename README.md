@@ -5,6 +5,7 @@ A photo management application
 
 
 ###Dependencies:
+* * *
 
 [Apache Commons Codec]('http://commons.apache.org/codec/')
 
