@@ -2027,7 +2027,6 @@
 /**
  * Custom JS
  */
-$(document).ready(function(){
 	
 	$("form#signup_form").live("submit", function(){
 		var name=$("#inputName").val();
@@ -2048,13 +2047,13 @@ $(document).ready(function(){
 	});
 	
 	$("#uploadPhotoButton").click(function(){
-		$("#photoUploadForm").ajaxForm({
-			success: function(data){
-				console.log(data);
-			}
-		}).submit();
+				$("#photoUploadForm").ajaxForm({
+					success: function(data){
+						var obj=jQuery.parseJSON(data);
+						console.log(obj.stat);
+					}
+				}).submit();
 		return false;
-	})
 });
 
 
