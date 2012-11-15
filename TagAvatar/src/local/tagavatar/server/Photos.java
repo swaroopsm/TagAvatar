@@ -3,6 +3,7 @@ package local.tagavatar.server;
 import java.sql.*;
 
 import local.tagavatar.server.Settings;
+import org.json.*;
 
 public class Photos {
 	
@@ -26,6 +27,27 @@ public class Photos {
 			return true;
 		}catch(Exception e){
 			return false;
+		}
+	}
+	
+	public String user_photos(String username){
+		String sql="SELECT `title`,`desc`,`photo` FROM photos WHERE user_id='"+username+"'";
+		try{
+			Statement st=this.con.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			JSONArray json2=new JSONArray();
+			while(rs.next()){
+				//json2
+				//json2.put(rs.getString("title"));
+				JSONObject json=new JSONObject();
+				json.put("title", rs.getString("title"));
+				json.put("desc", rs.getString("desc"));
+				json.put("photo", rs.getString("photo"));
+				json2.put(json);
+			}
+			return json2.toString();
+		}catch(Exception e){
+			return e.getMessage();
 		}
 	}
 	
