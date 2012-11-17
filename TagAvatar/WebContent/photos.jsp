@@ -40,6 +40,14 @@
 #image_wrap img{
 	max-width: 980px;
 }
+
+#img_title{
+	display: block;
+	color: white;
+	text-align: center;
+	margin-top: 8px;
+	font-family: 'Trebuchet MS';
+}
 </style>
 </head>
 <body style="overflow-x: hidden;background: #000; //width: 980px; //margin: 0px auto;"><!-- wrapper element for the large image -->
@@ -61,7 +69,8 @@
 
 <!-- root element for scrollable -->
 
-<div id="image_wrap" style="margin-top: 50px;//margin-right: 100px;">
+<div id="img_title"></div>
+<div id="image_wrap" style="margin-top: 15px;//margin-right: 100px;">
   <!-- Initially the image is a simple 1x1 pixel transparent GIF -->
   <img src="img/loader.gif" width="" height="" />
 </div>
@@ -75,7 +84,6 @@
 $(function() {
 	$.post("test", function(data){
 		var obj=$.parseJSON(data);
-		console.log(obj);
 		$(".items").html();
 		var noItems=Math.ceil((obj.length)/8);
 		for(var j=0;j<noItems;j++){
@@ -84,7 +92,7 @@ $(function() {
 		var t=8,z=0;
 		for(var i=0;i<obj.length;i++){
 			if(i<t){
-				$("#group"+z).append("<a href='#'><img src='/images/thumbnails/"+obj[i].photo+"' data-large='/images/"+obj[i].photo+"'></img></a>");
+				$("#group"+z).append("<a href='#'><img src='/images/thumbnails/"+obj[i].photo+"' data-large='/images/"+obj[i].photo+"' data-title='"+obj[i].title+"'></img></a>");
 			}
 			else{
 				i--;
@@ -93,7 +101,8 @@ $(function() {
 			}
 		}
 		$(".items").hide().fadeIn(500);
-		$("#image_wrap").html("<img src='/images/"+obj[0].photo+"'></img>").hide().fadeIn(500);
+		$("#img_title").html(obj[0].title);
+		$("#image_wrap").html("<img src='/images/"+obj[0].photo+"'></img>").hide().fadeTo(500,"1.0");
 	});
 $(".scrollable").scrollable();
 
@@ -119,9 +128,9 @@ $(".items img").live("click", function() {
 
 		// change the image
 		wrap.find("img").attr("src", url);
-
+	
 	};
-
+	$("#img_title").html($(this).attr("data-title")).hide().fadeIn(500);
 	// begin loading the image from www.flickr.com
 	img.src = url;
 
