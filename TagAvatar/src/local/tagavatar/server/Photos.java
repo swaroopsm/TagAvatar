@@ -31,7 +31,7 @@ public class Photos {
 	}
 	
 	public String user_photos(String username){
-		String sql="SELECT `title`,`desc`,`photo` FROM photos WHERE user_id='"+username+"'";
+		String sql="SELECT `title`,`desc`,`photo` FROM photos WHERE user_id='"+username+"' ORDER BY id DESC";
 		try{
 			Statement st=this.con.createStatement();
 			ResultSet rs=st.executeQuery(sql);
