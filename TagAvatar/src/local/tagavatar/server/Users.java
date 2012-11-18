@@ -16,6 +16,11 @@ import org.json.*;
 
 public class Users {
 	
+	private String name;
+	private String email;
+	private String bio;
+	private String url;
+	private String location;
 	private Connection con;
 	
 	public Users(){
