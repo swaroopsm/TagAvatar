@@ -71,9 +71,9 @@
              <li class="dropdown">
           	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 13px;"><% out.println(session.getAttribute("username")); %><b class="caret"></b></a>
               <ul class="dropdown-menu" style="font-size: 13px;">
-              	<li><a href="/">Home</a></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="photos.jsp">My Photos</a></li>
+              	<li><a href="user.jsp">Home</a></li>
+                <li><a href="profile">Profile</a></li>
+                <li><a href="photos">My Photos</a></li>
                 <li class="divider"></li>
                 <li><a href="logout">Log out!</a></li>
               </ul>
