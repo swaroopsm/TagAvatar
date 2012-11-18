@@ -37,6 +37,11 @@
 			if(session.getAttribute("loggedin").toString().equals("true")){
 			
 	%>
+	<%@page import="local.tagavatar.server.Users" %>
+	<% 	
+		Users u = new Users();
+		u.my_info((String) session.getAttribute("username"));
+	%>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -83,15 +88,51 @@
 <br>
 		<div class="rows">
 			<div id="latest_pic_div">
-				<div class="span6">
-				<div id="random_pic" style="max-height: 400px; max-width: 400px;">
-					<center><img src="img/loader.gif" style="margin-left: 200px;position: absolute;"/></center>
+				<div class="span4">
+				<div id="random_pic" style="max-height: 400px; max-width: 300px;">
+					<img src="http://placehold.it/300X300" class="thumbnail"/>
 				</div>
 			</div>
-			<div class="span5 well" style="display: none;" id="pic_info">
-				<h4 id="pic_title">Photo Title</h4>
+			<div class="span7 well" id="pic_info">
+				<h4 id="pic_title">Profile</h4>
 				<hr class="adjust">
-				<p id="pic_desc">Photo Description...</p>
+				<form class="form form-horizontal">
+					<div class="control-group">
+					    <label class="control-label" for="inputName">Name: </label>
+					    <div class="controls">
+					      <input type="text" id="inputName" placeholder="Name" value="<% out.println(u.get_name()); %>">
+					    </div>
+					  </div>
+					<div class="control-group">
+					    <label class="control-label" for="inputEmail">Email: </label>
+					    <div class="controls">
+					      <input type="text" id="inputEmail" placeholder="Email" value="<% out.println(u.get_email()); %>">
+					    </div>
+					  </div>
+					  <div class="control-group">
+					    <label class="control-label" for="inputBio">Bio: </label>
+					    <div class="controls">
+					      <textarea class="span3" rows="5" id="inputBio"><% out.println(u.get_bio()); %></textarea>
+					    </div>
+					  </div>
+					  <div class="control-group">
+					    <label class="control-label" for="inputUrl">Website: </label>
+					    <div class="controls">
+					      <input type="text" id="inputUrl" placeholder="Website" value="<% out.println(u.get_url()); %>">
+					    </div>
+					  </div>
+					  <div class="control-group">
+					    <label class="control-label" for="inputLocation">Location: </label>
+					    <div class="controls">
+					      <input type="text" id="inputLocation" placeholder="Your City, Country" value="<% out.println(u.get_location()); %>">
+					    </div>
+					  </div>
+					  <div class="control-group">
+					    <div class="controls">
+					      <button type="submit" class="btn btn-success">Update &raquo;</button>
+					    </div>
+					  </div>
+				</form>
 			</div>
 			</div>
 			<div class="span12">
@@ -141,20 +182,6 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.form.js"></script>
 	<script src="js/tagavatar.js"></script>
-	<script>
-		$(document).ready(function(){
-			$.post("random_pic", function(data){
-				var obj=$.parseJSON(data);
-				$("#random_pic").html("<img id='my_img' src='/images/"+obj.photo+"' class='thumbnail' style='max-width: 400px;'></img>");
-				$("#pic_title").html(obj.title+"<p style='font-size: 11px;'> by <a href='#'>"+obj.username+"</a></p>");
-				$("#pic_desc").html(obj.desc);
-				$("#random_pic").hide().fadeIn(300);
-				$("#my_img").ready(function(){
-					$("div#pic_info").fadeIn(300);
-				})
-			});
-		});
-	</script>
 	<%
 		}
 			else{
