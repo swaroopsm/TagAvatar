@@ -82,13 +82,17 @@
 
 <br>
 		<div class="rows">
-			<div class="span6">
-				<a href="#" title="Most Recent Photo"><img src="http://placehold.it/400x400"  style="width: 400px;height: 400px;" class="thumbnail" /></a>
+			<div id="latest_pic_div">
+				<div class="span6">
+				<div id="random_pic" style="max-height: 400px; max-width: 400px;">
+					<center><img src="img/loader.gif" style="margin-left: 200px;position: absolute;"/></center>
+				</div>
 			</div>
-			<div class="span5 well">
-				<h4>Photo Title</h4>
+			<div class="span5 well" style="display: none;" id="pic_info">
+				<h4 id="pic_title">Photo Title</h4>
 				<hr class="adjust">
-				<p>Photo Description...</p>
+				<p id="pic_desc">Photo Description...</p>
+			</div>
 			</div>
 			<div class="span12">
 				<hr style="width: 900px;">
@@ -137,6 +141,20 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.form.js"></script>
 	<script src="js/tagavatar.js"></script>
+	<script>
+		$(document).ready(function(){
+			$.post("random_pic", function(data){
+				var obj=$.parseJSON(data);
+				$("#random_pic").html("<img id='my_img' src='/images/"+obj.photo+"' class='thumbnail' style='max-width: 400px;'></img>");
+				$("#pic_title").html(obj.title+"<p style='font-size: 11px;'> by <a href='#'>"+obj.username+"</a></p>");
+				$("#pic_desc").html(obj.desc);
+				$("#random_pic").hide().fadeIn(300);
+				$("#my_img").ready(function(){
+					$("div#pic_info").fadeIn(300);
+				})
+			});
+		});
+	</script>
 	<%
 		}
 			else{
