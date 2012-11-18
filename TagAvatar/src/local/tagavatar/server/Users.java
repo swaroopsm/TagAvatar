@@ -48,6 +48,26 @@ public class Users {
 		this.location = arg;
 	}
 	
+	public String get_name(){
+		return this.name;
+	}
+	
+	public String get_email(){
+		return this.email;
+	}
+	
+	public String get_bio(){
+		return this.bio;
+	}
+	
+	public String get_url(){
+		return this.url;
+	}
+	
+	public String get_location(){
+		return this.location;
+	}
+	
 	public String create(String name, String email, String username, String password){
 		try{
 			MessageDigest digest = MessageDigest.getInstance("MD5");
