@@ -51,6 +51,18 @@
 	text-shadow: -1px 1px 21px #773277, 1px 0px 17px ghostWhite;
 	font-size: 16px;
 }
+
+.home_link{
+	font-family: "Verdana";
+	color: #15BDFF;
+	text-decoration: none;
+	font-size: 13px;
+}
+
+a.home_link:hover{
+	text-decoration: underline;
+}
+
 </style>
 </head>
 <body style="overflow-x: hidden;background: #000; //width: 980px; //margin: 0px auto;"><!-- wrapper element for the large image -->
@@ -66,12 +78,13 @@
 
 </div>
 
+<span class="home_link" style="margin-left: 30px;">&laquo; <a class="home_link" href="user.jsp">Home</a></span>
+
 <!-- HTML structures -->
 <div style="margin:0 auto; width: 980px; height:120px;">
 <!-- "previous page" action -->
 
 <!-- root element for scrollable -->
-
 <div id="image_wrap" style="margin-top: 15px;//margin-right: 100px;">
   <!-- Initially the image is a simple 1x1 pixel transparent GIF -->
   <img src="img/loader.gif" width="" height="" />
