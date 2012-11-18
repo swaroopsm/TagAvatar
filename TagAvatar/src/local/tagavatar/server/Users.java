@@ -37,7 +37,7 @@ public class Users {
 	}
 	
 	public void set_bio(String arg){
-		this.bio = bio;
+		this.bio = arg;
 	}
 	
 	public void set_url(String arg){
@@ -106,6 +106,23 @@ public class Users {
 			return json.toString();
 		}catch(Exception e){
 			return null;
+		}
+	}
+	
+	public void my_info(String username){
+		try{
+			String sql="SELECT * FROM users WHERE username='"+username+"'";
+			Statement st=this.con.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			while(rs.next()){
+				set_name(rs.getString("name"));
+				set_email(rs.getString("email"));
+				set_bio(rs.getString("bio"));
+				set_url(rs.getString("url"));
+				set_location(rs.getString("location"));
+			}
+		}catch(Exception e){
+			
 		}
 	}
 	
