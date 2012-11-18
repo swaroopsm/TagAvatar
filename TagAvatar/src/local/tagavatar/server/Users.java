@@ -28,6 +28,26 @@ public class Users {
 		this.con=s.get_connection();
 	}
 	
+	public void set_name(String arg){
+		this.name = arg;
+	}
+	
+	public void set_email(String arg){
+		this.email = arg;
+	}
+	
+	public void set_bio(String arg){
+		this.bio = bio;
+	}
+	
+	public void set_url(String arg){
+		this.url = arg;
+	}
+	
+	public void set_location(String arg){
+		this.location = arg;
+	}
+	
 	public String create(String name, String email, String username, String password){
 		try{
 			MessageDigest digest = MessageDigest.getInstance("MD5");
