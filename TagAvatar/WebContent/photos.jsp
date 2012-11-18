@@ -45,8 +45,11 @@
 	display: block;
 	color: white;
 	text-align: center;
-	margin-top: 8px;
-	font-family: 'Trebuchet MS';
+	padding-top: 10px;
+	padding-bottom: 30px;
+	font-family: 'Verdana';
+	text-shadow: -1px 1px 21px #773277, 1px 0px 17px ghostWhite;
+	font-size: 16px;
 }
 </style>
 </head>
@@ -69,12 +72,11 @@
 
 <!-- root element for scrollable -->
 
-<div id="img_title"></div>
 <div id="image_wrap" style="margin-top: 15px;//margin-right: 100px;">
   <!-- Initially the image is a simple 1x1 pixel transparent GIF -->
   <img src="img/loader.gif" width="" height="" />
 </div>
-
+<div id="img_title"></div>
 
 
 <!-- "next page" action -->
