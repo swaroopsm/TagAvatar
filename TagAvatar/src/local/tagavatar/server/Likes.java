@@ -26,18 +26,26 @@ public class Likes {
 		}
 	}
 	
-	public int get_likes(int photo){
+	public int[] get_likes(int photo, String username){
 		String sql="SELECT * FROM likes WHERE photo="+photo;
-		int c=0;
+		int[] a=new int[2];
+		int c=0, u=0;
 		try{
 			Statement st=this.con.createStatement();
 			ResultSet rs=st.executeQuery(sql);
 			while(rs.next()){
 				c++;
+				if(rs.getString("user_id").equals(username)){
+					u++;
+				}
 			}
-			return c;
+			a[0]=c;
+			a[1]=u;
+			return a;
 		}catch(Exception e){
-			return 0;
+			a[0]=0;
+			a[1]=0;
+			return a;
 		}
 	}
 }
