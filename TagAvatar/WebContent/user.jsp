@@ -158,7 +158,7 @@
 			$.post("random_pic", function(data){
 				var obj=$.parseJSON(data);
 				$("#random_pic").html("<img id='my_img' src='/images/"+obj.photo+"' class='thumbnail' style='max-width: 400px;'></img>");
-				$("#pic_title").html(obj.title+"<p style='font-size: 11px;'> by <a href='#'>"+obj.username+"</a></p>");
+				$("#pic_title").html(obj.title+"<p style='font-size: 11px;'> by <a href='#'>"+obj.username+"</a></p><p><a href='#' id='like_btn' title='Like'><i class='icon-thumbs-up icon-white'></i></a>&nbsp;&nbsp;<a href='#' title='Dislike' id='dislike_btn'><i class='icon-thumbs-down icon-white'></i></a></p>");
 				$("#pic_desc").html(obj.desc);
 				$("#random_pic").hide().fadeIn(300);
 				$("#my_img").ready(function(){
