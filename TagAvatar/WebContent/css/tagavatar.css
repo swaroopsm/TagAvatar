@@ -5784,3 +5784,11 @@ a.badge:hover {
 .body_background{
 	background-color: #262920;
 }
+
+a#like_btn{
+	text-decoration: none;
+}
+
+a#dislike_btn{
+	text-decoration: none;
+}
