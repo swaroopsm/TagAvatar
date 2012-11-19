@@ -2115,7 +2115,13 @@ return false;
 		var photo=$("p#photo_id").attr('data-photo');
 		$.post("like", {photo: photo},
 		function(data){
-			console.log(data);
+			var obj=$.parseJSON(data);
+			if(obj.status){
+				var l_count=$("#likes_count").html();
+				$(".like_btn").attr("title", "You like this!");
+				$(".like_btn").removeAttr("id");
+				$("#likes_count").html(parseInt(l_count)+1).hide().fadeIn(300);
+			}
 		});
 		return false;
 	});
