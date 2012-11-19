@@ -157,7 +157,7 @@
 		$(document).ready(function(){
 			$.post("random_pic", function(data){
 				var obj=$.parseJSON(data);
-				var like_link_full="<a href='#' id='like_btn' class='like_btn' title='like'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
+				var like_link_full="<a href='#' id='like_btn' class='like_btn' title='Like'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
 				console.log(obj);
 				if(obj.ilike>0){
 					like_link_full="<a href='#' id='' class='like_btn' title='You like this!'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
