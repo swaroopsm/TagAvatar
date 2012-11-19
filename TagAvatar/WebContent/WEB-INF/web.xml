@@ -31,4 +31,26 @@
          /home/swaroop/codehub/java/global_img/thumbnails/
      </param-value>
   </context-param>
+  <context-param>
+    <description>Location to store uploaded avatar</description>
+    <param-name>avatar-upload</param-name>
+    <param-value>
+         /home/swaroop/codehub/java/global_img/avatars/
+     </param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>AvatarUpload</servlet-name>
+    <servlet-class>local.tagavatar.response.AvatarUpload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AvatarUpload</servlet-name>
+    <url-pattern>/AvatarUpload</url-pattern>
+  </servlet-mapping>
+  <context-param>
+    <description>Location to store small uploaded avatar</description>
+    <param-name>avatar-upload-small</param-name>
+    <param-value>
+         /home/swaroop/codehub/java/global_img/avatars/small/
+     </param-value>
+  </context-param>
 </web-app>
