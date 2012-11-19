@@ -114,7 +114,7 @@ public class AvatarUpload extends HttpServlet {
       Users u=new Users();
       //response.setContentType("text/html");
       JSONObject json=new JSONObject();
-      if(u.update_avatar(username, fname+"."+ext)){
+      if(u.update_avatar(username, fname+"."+ext, filePath, thumbPath)){
     	  json.put("status", true);
           json.put("photo", fname+"."+ext);
           out.println(json.toString());
