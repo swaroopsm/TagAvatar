@@ -111,7 +111,7 @@ public class Users {
 	
 	public void my_info(String username){
 		try{
-			String sql="SELECT * FROM users WHERE username='"+username+"'";
+			String sql="SELECT * FROM users WHERE `username`='"+username+"'";
 			Statement st=this.con.createStatement();
 			ResultSet rs=st.executeQuery(sql);
 			while(rs.next()){
@@ -123,6 +123,28 @@ public class Users {
 			}
 		}catch(Exception e){
 			
+		}
+	}
+	
+	public String update(String username, String name, String email, String bio, String url, String location){
+		String sql="UPDATE users SET `name`=?, `email`=?, `bio`=?, `url`=?, `location`=? WHERE `username`=?";
+		JSONObject json=new JSONObject();
+		try{
+			PreparedStatement ps=(PreparedStatement) this.con.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, email);
+			ps.setString(3, bio);
+			ps.setString(4, url);
+			ps.setString(5, location);
+			ps.setString(6, username);
+			ps.executeUpdate();
+			json.put("status", true);
+			json.put("message", "Profile updated successfully..");
+			return json.toString();
+		}catch(Exception e){
+			json.put("status", false);
+			json.put("message", e.getMessage());
+			return json.toString();
 		}
 	}
 	
