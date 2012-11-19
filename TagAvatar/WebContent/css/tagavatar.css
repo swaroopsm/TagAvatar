@@ -5792,3 +5792,7 @@ a#like_btn{
 a#dislike_btn{
 	text-decoration: none;
 }
+
+.like_dislike_count{
+	font-size: 18px;
+}
