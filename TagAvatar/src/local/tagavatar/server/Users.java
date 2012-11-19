@@ -158,4 +158,15 @@ public class Users {
 		}
 	}
 	
+	public Boolean update_avatar(String username, String avatar){
+		String sql="UPDATE users SET `avatar`='"+avatar+"' WHERE username='"+username+"'";
+		try{
+			Statement st=this.con.createStatement();
+			st.executeUpdate(sql);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
 }
