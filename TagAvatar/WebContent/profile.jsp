@@ -1,3 +1,4 @@
+<%@page import="java.io.FileNotFoundException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,6 +42,15 @@
 	<% 	
 		Users u = new Users();
 		u.my_info((String) session.getAttribute("username"));
+		String avatar=u.get_avatar();
+		String full_pic;
+		if(avatar.equals("")){
+			avatar="<i class='icon-user'></i>";
+			full_pic="default_avatar.gif";
+		}else{
+			avatar="<img src='/images/avatars/small/"+avatar+"' style='max-height: 25px;'/>";
+			full_pic=avatar;
+		}
 	%>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -69,7 +79,7 @@
           	  </li>
              <li class="divider-vertical"></li>
              <li class="dropdown">
-          	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 13px;"><% out.println(session.getAttribute("username")); %><b class="caret"></b></a>
+          	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 13px;"><% out.println(avatar); %>&nbsp;<% out.println(session.getAttribute("username")); %><b class="caret"></b></a>
               <ul class="dropdown-menu" style="font-size: 13px;">
               	<li><a href="user.jsp">Home</a></li>
                 <li><a href="profile">Profile</a></li>
@@ -90,7 +100,7 @@
 			<div id="latest_pic_div">
 				<div class="span4">
 				<div id="random_pic" style="max-height: 400px; max-width: 250px;">
-					<img src="/images/avatars/<% out.println(u.get_avatar()); %>" class="thumbnail" id="my_avatar"/>
+					<img src="/images/avatars/<% out.println(full_pic); %>" class="thumbnail" id="my_avatar"/>
 				</div>
 				<br>
 				<center><button class="btn btn-danger" href="#avatarModal" data-toggle="modal">Update Avatar &raquo;</button></center>
