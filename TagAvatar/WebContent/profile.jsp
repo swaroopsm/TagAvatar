@@ -129,7 +129,7 @@
 					  </div>
 					  <div class="control-group">
 					    <div class="controls">
-					      <button type="submit" class="btn btn-success">Update &raquo;</button>
+					      <button type="submit" class="btn btn-success" id="update_profile_btn">Update &raquo;</button>
 					    </div>
 					  </div>
 				</form>
