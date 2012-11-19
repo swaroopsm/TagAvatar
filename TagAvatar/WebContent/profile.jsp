@@ -48,8 +48,8 @@
 			avatar="<i class='icon-user'></i>";
 			full_pic="default_avatar.gif";
 		}else{
+			full_pic="<img src='/images/avatars/"+avatar+"' style='max-height: 250px;' id='my_avatar'/>";
 			avatar="<img src='/images/avatars/small/"+avatar+"' style='max-height: 25px;'/>";
-			full_pic=avatar;
 		}
 	%>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -100,7 +100,7 @@
 			<div id="latest_pic_div">
 				<div class="span4">
 				<div id="random_pic" style="max-height: 400px; max-width: 250px;">
-					<img src="/images/avatars/<% out.println(full_pic); %>" class="thumbnail" id="my_avatar"/>
+					<% out.println(full_pic); %>
 				</div>
 				<br>
 				<center><button class="btn btn-danger" href="#avatarModal" data-toggle="modal">Update Avatar &raquo;</button></center>
