@@ -90,7 +90,7 @@
 			<div id="latest_pic_div">
 				<div class="span4">
 				<div id="random_pic" style="max-height: 400px; max-width: 250px;">
-					<img src="/images/avatars/<% out.println(u.get_avatar()); %>" class="thumbnail"/>
+					<img src="/images/avatars/<% out.println(u.get_avatar()); %>" class="thumbnail" id="my_avatar"/>
 				</div>
 				<br>
 				<center><button class="btn btn-danger" href="#avatarModal" data-toggle="modal">Update Avatar &raquo;</button></center>
