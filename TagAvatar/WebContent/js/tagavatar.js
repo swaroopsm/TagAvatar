@@ -2095,6 +2095,7 @@
 		$("#loader").show();
 		$("#avatarUploadForm").ajaxForm({
 			success: function(data){
+				var obj=$.parseJSON(data);
 				if(obj.status){
 					$("#avatarUploadForm")[0].reset();
 					$("#avatarModal").modal('hide');
