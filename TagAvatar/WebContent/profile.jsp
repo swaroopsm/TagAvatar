@@ -46,9 +46,9 @@
 		String full_pic;
 		if(avatar.equals("")){
 			avatar="<i class='icon-user'></i>";
-			full_pic="default_avatar.gif";
+			full_pic="<img src='/images/avatars/default_avatar.gif' class='thumbnail' style='max-height: 250px;' id='my_avatar'/>";
 		}else{
-			full_pic="<img src='/images/avatars/"+avatar+"' style='max-height: 250px;' id='my_avatar'/>";
+			full_pic="<img src='/images/avatars/"+avatar+"' class='thumbnail' style='max-height: 250px;' id='my_avatar'/>";
 			avatar="<img src='/images/avatars/small/"+avatar+"' style='max-height: 25px;'/>";
 		}
 	%>
