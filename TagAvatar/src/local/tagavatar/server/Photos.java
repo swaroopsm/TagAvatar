@@ -52,7 +52,7 @@ public class Photos {
 	}
 	
 	public String get_random(String username){
-		String sql="SELECT `title`,`desc`,`photo`,`user_id` FROM photos WHERE user_id!='"+username+"' ORDER BY RAND() LIMIT 1";
+		String sql="SELECT `id`,`title`,`desc`,`photo`,`user_id` FROM photos WHERE user_id!='"+username+"' ORDER BY RAND() LIMIT 1";
 		JSONObject json=new JSONObject();
 		try{
 			Statement st=this.con.createStatement();
@@ -63,6 +63,7 @@ public class Photos {
 				json.put("photo", rs.getString("photo"));
 				json.put("desc", rs.getString("desc"));
 				json.put("username", rs.getString("user_id"));
+				json.put("photo_id", rs.getInt("id"));
 			}
 			return json.toString();
 		}catch(Exception e){
