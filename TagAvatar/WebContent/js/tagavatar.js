@@ -2069,6 +2069,27 @@
 				}).submit();
 		return false;
 });
+	
+	$("#update_profile_btn").live("click", function(){
+		var name=$.trim($("#inputName").val());
+		var email=$.trim($("#inputEmail").val());
+		var bio=$.trim($("#inputBio").val());
+		var url=$.trim($("#inputUrl").val());
+		var location=$.trim($("#inputLocation").val());
+		if(name=="" || email=="" || bio=="" || url=="" || location==""){
+			/**
+			 * TODO: Display Error Message
+			 */
+		}else{
+			$.post("updateProfile", {name: name, email: email, bio: bio, url: url, location: location},
+			function(data){
+				var obj=$.parseJSON(data);
+				console.log(obj);	
+			});
+		}
+		
+		return false;
+	});
 
 
 
