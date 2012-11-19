@@ -21,6 +21,7 @@ public class Users {
 	private String bio;
 	private String url;
 	private String location;
+	private String avatar;
 	private Connection con;
 	
 	public Users(){
@@ -48,6 +49,10 @@ public class Users {
 		this.location = arg;
 	}
 	
+	public void set_avatar(String arg){
+		this.avatar = arg;
+	}
+	
 	public String get_name(){
 		return this.name;
 	}
@@ -66,6 +71,10 @@ public class Users {
 	
 	public String get_location(){
 		return this.location;
+	}
+	
+	public String get_avatar(){
+		return this.avatar;
 	}
 	
 	public String create(String name, String email, String username, String password){
@@ -120,6 +129,7 @@ public class Users {
 				set_bio(rs.getString("bio"));
 				set_url(rs.getString("url"));
 				set_location(rs.getString("location"));
+				set_avatar(rs.getString("avatar"));
 			}
 		}catch(Exception e){
 			
