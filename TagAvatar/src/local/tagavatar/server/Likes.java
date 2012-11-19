@@ -26,4 +26,18 @@ public class Likes {
 		}
 	}
 	
+	public int get_likes(int photo){
+		String sql="SELECT * FROM likes WHERE photo="+photo;
+		int c=0;
+		try{
+			Statement st=this.con.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			while(rs.next()){
+				c++;
+			}
+			return c;
+		}catch(Exception e){
+			return 0;
+		}
+	}
 }
