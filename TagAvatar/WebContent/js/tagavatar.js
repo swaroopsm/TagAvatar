@@ -2095,7 +2095,16 @@
 		$("#loader").show();
 		$("#avatarUploadForm").ajaxForm({
 			success: function(data){
-				console.log(data);
+				if(obj.status){
+					$("#avatarUploadForm")[0].reset();
+					$("#avatarModal").modal('hide');
+					$("#my_avatar").attr("src", "/images/avatars/"+obj.photo);
+					$("#my_avatar").hide().fadeIn(300);
+				}else{
+					/**
+					 * TODO: Display error message
+					 */
+				}
 			}
 		}).submit();
 return false;
