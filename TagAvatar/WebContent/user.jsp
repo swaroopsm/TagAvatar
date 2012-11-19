@@ -37,6 +37,18 @@
 			if(session.getAttribute("loggedin").toString().equals("true")){
 			
 	%>
+	<%@page import="local.tagavatar.server.Users" %>
+	<%
+		Users u = new Users();
+		u.my_info((String) session.getAttribute("username"));
+		String avatar=u.get_avatar();
+		String full_pic;
+		if(avatar.equals("")){
+			avatar="<i class='icon-user'></i>";
+		}else{
+			avatar="<img src='/images/avatars/small/"+avatar+"' style='max-height: 25px;'/>";
+		}
+	%>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -64,7 +76,7 @@
           	  </li>
              <li class="divider-vertical"></li>
              <li class="dropdown">
-          	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 13px;"><% out.println(session.getAttribute("username")); %><b class="caret"></b></a>
+          	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 13px;"><% out.println(avatar); %>&nbsp;<% out.println(session.getAttribute("username")); %><b class="caret"></b></a>
               <ul class="dropdown-menu" style="font-size: 13px;">
               	<li><a href="user.jsp">Home</a></li>
                 <li><a href="profile">Profile</a></li>
