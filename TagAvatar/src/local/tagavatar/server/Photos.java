@@ -4,6 +4,7 @@ import java.sql.*;
 
 import local.tagavatar.server.Settings;
 import org.json.*;
+import local.tagavatar.server.Likes;
 
 public class Photos {
 	
@@ -55,6 +56,7 @@ public class Photos {
 		String sql="SELECT `id`,`title`,`desc`,`photo`,`user_id` FROM photos WHERE user_id!='"+username+"' ORDER BY RAND() LIMIT 1";
 		JSONObject json=new JSONObject();
 		try{
+			Likes l=new Likes();
 			Statement st=this.con.createStatement();
 			ResultSet rs=st.executeQuery(sql);
 			while(rs.next()){
@@ -64,6 +66,7 @@ public class Photos {
 				json.put("desc", rs.getString("desc"));
 				json.put("username", rs.getString("user_id"));
 				json.put("photo_id", rs.getInt("id"));
+				json.put("likes", l.get_likes(rs.getInt("id")));
 			}
 			return json.toString();
 		}catch(Exception e){
