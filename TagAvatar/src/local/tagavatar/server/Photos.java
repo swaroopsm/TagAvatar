@@ -66,7 +66,8 @@ public class Photos {
 				json.put("desc", rs.getString("desc"));
 				json.put("username", rs.getString("user_id"));
 				json.put("photo_id", rs.getInt("id"));
-				json.put("likes", l.get_likes(rs.getInt("id")));
+				json.put("likes", l.get_likes(rs.getInt("id"), username)[0]);
+				json.put("ilike", l.get_likes(rs.getInt("id"), username)[1]);
 			}
 			return json.toString();
 		}catch(Exception e){
