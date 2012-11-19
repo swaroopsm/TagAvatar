@@ -2110,6 +2110,13 @@
 		}).submit();
 return false;
 });
-
-
-
+	
+	$("a#like_btn").live("click", function(){
+		var photo=$("p#photo_id").attr('data-photo');
+		$.post("like", {photo: photo},
+		function(data){
+			console.log(data);
+		});
+		return false;
+	});
+	
