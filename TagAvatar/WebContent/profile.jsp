@@ -92,6 +92,8 @@
 				<div id="random_pic" style="max-height: 400px; max-width: 300px;">
 					<img src="http://placehold.it/300X300" class="thumbnail"/>
 				</div>
+				<br>
+				<center><button class="btn btn-danger" href="#avatarModal" data-toggle="modal">Update Avatar &raquo;</button></center>
 			</div>
 			<div class="span7 well" id="pic_info">
 				<h4 id="pic_title">Profile</h4>
@@ -172,6 +174,32 @@
 			  </form>
 			</div>
 		<!-- End Photo Modal -->
+		
+		
+		
+		<!-- Avatar Modal -->
+			<div id="avatarModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			    <h3 id="photoModalLabel">Update Avatar</h3>
+			  </div>
+			   <div class="modal-body" id="afterAvatar" style="display: none;"></div>
+			   <form class="form-horizontal" id="avatarUploadForm" method="POST" action="AvatarUpload" enctype="multipart/form-data">
+			  <div class="modal-body">
+				  <div class="control-group">
+				    <div class="controls">
+				      <input type="file" id="file" name="file">
+				    </div>
+				  </div>
+			  </div>
+			  <div class="modal-footer">
+			    <input type="submit" class="btn btn-success" id="avatarPhotoButton" value="Update Avatar &raquo;" />
+			    <center><div id="loader" style="display: none;"><img src="img/loader.gif" style="position: absolute;"/></div></center>
+			  </div>
+			  </form>
+			</div>
+		<!-- End Avatar Modal -->
+		
 		
 		
     </div> <!-- /container -->
