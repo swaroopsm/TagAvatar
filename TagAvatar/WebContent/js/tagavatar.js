@@ -2091,6 +2091,15 @@
 		return false;
 	});
 
+	$("#avatarPhotoButton").click(function(){
+		$("#loader").show();
+		$("#avatarUploadForm").ajaxForm({
+			success: function(data){
+				console.log(data);
+			}
+		}).submit();
+return false;
+});
 
 
 
