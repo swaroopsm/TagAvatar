@@ -56,7 +56,14 @@
 			
 			if(session.getAttribute("loggedin").toString().equals("true")){
 				
-			
+				Users u2=new Users();
+				u2.my_info((String) session.getAttribute("username"));
+				String avatar2=u2.get_avatar();
+				if(avatar2.equals("")){
+					avatar2="<i class='icon-user'></i>";
+				}else{
+					avatar2="<img src='/images/avatars/small/"+avatar2+"' style='max-height: 25px;'/>";
+				}
 		
 	%>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -86,7 +93,7 @@
           	  </li>
              <li class="divider-vertical"></li>
              <li class="dropdown">
-          	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 13px;"><% out.println(avatar); %>&nbsp;<% out.println(session.getAttribute("username")); %><b class="caret"></b></a>
+          	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 13px;"><% out.println(avatar2); %>&nbsp;<% out.println(session.getAttribute("username")); %><b class="caret"></b></a>
               <ul class="dropdown-menu" style="font-size: 13px;">
               	<li><a href="user.jsp">Home</a></li>
                 <li><a href="profile">Profile</a></li>
