@@ -57,7 +57,7 @@ public class Likes {
 	}
 	
 	public int delete(int photo, String username){
-		String sql="DELETE FROM `likes` WHERE photo="+photo+" AND user_id='"+username+"'";
+		String sql="DELETE FROM likes WHERE photo="+photo+" AND user_id='"+username+"'";
 		try{
 			Statement st=this.con.createStatement();
 			st.executeUpdate(sql);
