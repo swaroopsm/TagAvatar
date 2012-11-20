@@ -2126,3 +2126,11 @@ return false;
 		return false;
 	});
 	
+	$("a#dislike_btn").live("click", function(){
+		var photo=$("p#photo_id").attr('data-photo');
+		$.post("dislike", {photo: photo},
+		function(data){
+			console.log(data);
+		});
+	});
+	
