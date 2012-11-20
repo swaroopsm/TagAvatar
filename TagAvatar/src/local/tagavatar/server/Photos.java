@@ -4,6 +4,7 @@ import java.sql.*;
 import local.tagavatar.server.Settings;
 import org.json.*;
 import local.tagavatar.server.Likes;
+import local.tagavatar.server.Dislikes;
 
 public class Photos {
 	
@@ -56,6 +57,7 @@ public class Photos {
 		JSONObject json=new JSONObject();
 		try{
 			Likes l=new Likes();
+			Dislikes d=new Dislikes();
 			Statement st=this.con.createStatement();
 			ResultSet rs=st.executeQuery(sql);
 			while(rs.next()){
@@ -66,6 +68,7 @@ public class Photos {
 				json.put("username", rs.getString("user_id"));
 				json.put("photo_id", rs.getInt("id"));
 				json.put("likes", l.get_likes(rs.getInt("id")));
+				json.put("dislikes", d.get_dislikes(rs.getInt("id")));
 				json.put("ilike", l.i_like(rs.getInt("id"), username));
 			}
 			return json.toString();
