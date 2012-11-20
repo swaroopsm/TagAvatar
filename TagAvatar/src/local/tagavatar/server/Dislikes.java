@@ -43,5 +43,19 @@ public class Dislikes {
 		}
 	}
 	
+	public int i_dislike(int photo, String username){
+		String sql="SELECT * FROM dislikes WHERE photo="+photo+" AND user_id='"+username+"'";
+		int c=0;
+		try{
+			Statement st=this.con.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			if(rs.next()){
+				c++;
+			}
+			return c;
+		}catch(Exception e){
+			return 0;
+		}
+	}
 	
 }
