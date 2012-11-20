@@ -98,7 +98,7 @@
 		<div class="rows">
 			<div id="latest_pic_div">
 				<div class="span3">
-				<div id="random_pic" style="max-height: 400px; max-width: 200px;">
+				<div id="random_pic" style="max-height: 400px; max-width: 2x00px;">
 					<% out.println(full_pic); %>
 				</div>
 				<br>
@@ -107,14 +107,23 @@
 				<h4 style="line-height: 0px;"><% out.println(u.get_name()); %></h4>
 				<hr>
 				<p style="color: #777;"><i><% out.println(u.get_bio()); %></i></p>
-				<p style="font-size: 11px;"><a href='<% out.println(u.get_url()); %>' target='_BLANK'><% out.println(u.get_url()); %></a> <span style="color: #777;"><% if(u.get_location()!=""){ out.println(" | "+u.get_location()); } %></span></p>
+				<p style="font-size: 11px;">
+					<a href="<% out.println(u.get_url()); %>" target="_BLANK" ><% out.println(u.get_url()); %> </a>
+					<span style="color: #777;"><% if(u.get_location()!=""){ out.println(" | "+u.get_location()); } %></span>
+				</p>
 			</div>
+			<div class="well span8" style="background: #fff;">
+			<h4 style='line-height: 0px;'>Photo Stream</h4>
+			<hr class="adjust">
+			<div id="photo_stream" class="rows">
+				
+			</div>
+		</div>
 			</div>
 			<div class="span12">
 				<hr style="width: 900px;">
 			</div>
 		</div>
-		
 		<!-- Photo Modal -->
 			<div id="photoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
 			  <div class="modal-header">
@@ -158,6 +167,23 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.form.js"></script>
 	<script src="js/tagavatar.js"></script>
+	<script>
+		$(document).ready(function(){
+			var user=document.URL.split("?")[1].split("=")[1];
+			if(user.substring(user.length=='#'))
+				user=user.substring(0,user.length-1);
+			console.log(user);
+			$.post("publicPhotos", {username: user},
+			function(data){
+				var obj=$.parseJSON(data);
+				$("#photo_stream").html('');
+				for(var i=0;i<obj.length;i++){
+					$("#photo_stream").append("<div class='span2' style='padding-right: 40px;'><a href='#'><img src='/images/thumbnails/"+obj[i].photo+"' style='max-width: 180px;min-height: 140px;max-height: 140px;' class='thumbnail'></img></a></div>");
+				}
+				console.log(obj);
+			});
+		});
+	</script>
 	<%
 		}
 		catch(Exception e){
