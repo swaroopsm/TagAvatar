@@ -70,6 +70,7 @@ public class Photos {
 				json.put("likes", l.get_likes(rs.getInt("id")));
 				json.put("dislikes", d.get_dislikes(rs.getInt("id")));
 				json.put("ilike", l.i_like(rs.getInt("id"), username));
+				json.put("idislike", d.i_dislike(rs.getInt("id"), username));
 			}
 			return json.toString();
 		}catch(Exception e){
