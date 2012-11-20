@@ -249,7 +249,7 @@
 				var obj=$.parseJSON(data);
 				$("#photo_stream").html('');
 				for(var i=0;i<obj.length;i++){
-					$("#photo_stream").append("<div class='span2' style='padding-right: 40px;'><a href='#'><img src='/images/thumbnails/"+obj[i].photo+"' style='max-width: 180px;min-height: 140px;max-height: 140px;' class='thumbnail'></img></a></div>");
+					$("#photo_stream").append("<div class='span2' style='padding-right: 40px;'><a href='#'><img src='/images/thumbnails/"+obj[i].photo+"' style='max-width: 180px;min-height: 140px;max-height: 140px;' class='thumbnail'></img></a><center><h4 title='"+obj[i].likes+" like(s)'><i class='icon-thumbs-up' style='background-position: -105px -144px;'></i> <span class='like_dislike_count' style='font-size: 14px;margin-top: -2px;position: absolute;margin-left: 4px;' id='likes_count'>"+obj[i].likes+"</h4> <h4 style='position: absolute;margin-left: 100px;margin-top: -34px;' title='"+obj[i].dislikes+" dislike(s)'><i class='icon-thumbs-down' style='background-position: -134px -144px;'></i> <span class='like_dislike_count' style='font-size: 14px;margin-top: -4px;margin-left: 0px;' id='dislikes_count'>"+obj[i].dislikes+"</h4></center></div>");
 				}
 				console.log(obj);
 			});
