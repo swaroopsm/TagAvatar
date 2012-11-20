@@ -1,5 +1,6 @@
 package local.tagavatar.server;
 
+import java.io.File;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -10,6 +11,7 @@ import java.sql.Statement;
 
 import javax.sql.*;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.fileupload.FileItemIterator;
 
 import com.mysql.jdbc.PreparedStatement;
 import org.json.*;
@@ -155,6 +157,28 @@ public class Users {
 			json.put("status", false);
 			json.put("message", e.getMessage());
 			return json.toString();
+		}
+	}
+	
+	public Boolean update_avatar(String username, String avatar, String filepath, String thumbpath){
+		String sql="UPDATE users SET `avatar`='"+avatar+"' WHERE username='"+username+"'";
+		String sql2="SELECT `avatar` FROM users	WHERE username='"+username+"'";
+		try{
+			String old_pic;
+			Statement st2=this.con.createStatement();
+			ResultSet rs=st2.executeQuery(sql2);
+			while(rs.next()){
+				old_pic=rs.getString("avatar");
+				File file1=new File(filepath+old_pic);
+				File file2=new File(thumbpath+old_pic);
+				file1.delete();
+				file2.delete();
+			}
+			Statement st=this.con.createStatement();
+			st.executeUpdate(sql);
+			return true;
+		}catch(Exception e){
+			return false;
 		}
 	}
 	

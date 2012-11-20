@@ -1,9 +1,10 @@
 package local.tagavatar.server;
 
 import java.sql.*;
-
 import local.tagavatar.server.Settings;
 import org.json.*;
+import local.tagavatar.server.Likes;
+import local.tagavatar.server.Dislikes;
 
 public class Photos {
 	
@@ -52,9 +53,11 @@ public class Photos {
 	}
 	
 	public String get_random(String username){
-		String sql="SELECT `title`,`desc`,`photo`,`user_id` FROM photos WHERE user_id!='"+username+"' ORDER BY RAND() LIMIT 1";
+		String sql="SELECT `id`,`title`,`desc`,`photo`,`user_id` FROM photos WHERE user_id!='"+username+"' ORDER BY RAND() LIMIT 1";
 		JSONObject json=new JSONObject();
 		try{
+			Likes l=new Likes();
+			Dislikes d=new Dislikes();
 			Statement st=this.con.createStatement();
 			ResultSet rs=st.executeQuery(sql);
 			while(rs.next()){
@@ -63,11 +66,40 @@ public class Photos {
 				json.put("photo", rs.getString("photo"));
 				json.put("desc", rs.getString("desc"));
 				json.put("username", rs.getString("user_id"));
+				json.put("photo_id", rs.getInt("id"));
+				json.put("likes", l.get_likes(rs.getInt("id")));
+				json.put("dislikes", d.get_dislikes(rs.getInt("id")));
+				json.put("ilike", l.i_like(rs.getInt("id"), username));
+				json.put("idislike", d.i_dislike(rs.getInt("id"), username));
 			}
 			return json.toString();
 		}catch(Exception e){
 			json.put("status", false);
 			json.put("message", e.getMessage());
+			return json.toString();
+		}
+	}
+	
+	public String search(String title){
+		String sql="SELECT id, photos.title, photos.desc,photos.photo,photos.user_id FROM photos WHERE photos.title LIKE '%"+title+"%' ";
+		Likes l=new Likes();
+		try{
+			Statement st=this.con.createStatement();
+			JSONArray obj=new JSONArray();
+			ResultSet rs=st.executeQuery(sql);
+			while(rs.next()){
+				JSONObject json=new JSONObject();
+				json.put("title", rs.getString("title"));
+				json.put("desc", rs.getString("desc"));
+				json.put("photo", rs.getString("photo"));
+				json.put("username", rs.getString("user_id"));
+				json.put("likes",l.get_likes(rs.getInt("id")));
+				obj.put(json);
+			}
+			return obj.toString();
+		}catch(Exception e){
+			JSONObject json=new JSONObject();
+			json.put("success", false);
 			return json.toString();
 		}
 	}

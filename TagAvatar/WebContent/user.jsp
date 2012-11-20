@@ -37,6 +37,18 @@
 			if(session.getAttribute("loggedin").toString().equals("true")){
 			
 	%>
+	<%@page import="local.tagavatar.server.Users" %>
+	<%
+		Users u = new Users();
+		u.my_info((String) session.getAttribute("username"));
+		String avatar=u.get_avatar();
+		String full_pic;
+		if(avatar.equals("")){
+			avatar="<i class='icon-user'></i>";
+		}else{
+			avatar="<img src='/images/avatars/small/"+avatar+"' style='max-height: 25px;'/>";
+		}
+	%>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -64,7 +76,7 @@
           	  </li>
              <li class="divider-vertical"></li>
              <li class="dropdown">
-          	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 13px;"><% out.println(session.getAttribute("username")); %><b class="caret"></b></a>
+          	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 13px;"><% out.println(avatar); %>&nbsp;<% out.println(session.getAttribute("username")); %><b class="caret"></b></a>
               <ul class="dropdown-menu" style="font-size: 13px;">
               	<li><a href="user.jsp">Home</a></li>
                 <li><a href="profile">Profile</a></li>
@@ -145,9 +157,21 @@
 		$(document).ready(function(){
 			$.post("random_pic", function(data){
 				var obj=$.parseJSON(data);
+<<<<<<< HEAD
 				console.log(obj);
+=======
+				var like_link_full="<a href='#' id='like_btn' class='like_btn' title='Like'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
+				var dislike_link_full="<a href='#' id='dislike_btn' class='dislike_btn' title='Dislike'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
+				console.log(obj);
+				if(obj.ilike>0){
+					like_link_full="<a href='#' id='' class='like_btn' title='You like this!'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
+				}
+				if(obj.idislike>0){
+					dislike_link_full="<a href='#' id='' class='dislike_btn' title='You dislike this!'><i class='icon-thumbs-down icon-white'> &nbsp;</i></a> ";
+				}
+>>>>>>> upstream/master
 				$("#random_pic").html("<img id='my_img' src='/images/"+obj.photo+"' class='thumbnail' style='max-width: 400px;'></img>");
-				$("#pic_title").html(obj.title+"<p style='font-size: 11px;'> by <a href='#'>"+obj.username+"</a></p>");
+				$("#pic_title").html(obj.title+"<p style='font-size: 11px;' id='photo_id' data-photo='"+obj.photo_id+"'> by <a href='#'>"+obj.username+"</a></p><p>"+like_link_full+"<span class='like_dislike_count' id='likes_count'>"+obj.likes+"</span>&nbsp;&nbsp;"+dislike_link_full+"<span class='like_dislike_count' id='dislikes_count'>"+obj.dislikes+"</span></p>");
 				$("#pic_desc").html(obj.desc);
 				$("#random_pic").hide().fadeIn(300);
 				$("#my_img").ready(function(){

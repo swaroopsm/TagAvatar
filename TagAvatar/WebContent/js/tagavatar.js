@@ -2091,6 +2091,46 @@
 		return false;
 	});
 
-
-
-
+	$("#avatarPhotoButton").click(function(){
+		$("#loader").show();
+		$("#avatarUploadForm").ajaxForm({
+			success: function(data){
+				var obj=$.parseJSON(data);
+				if(obj.status){
+					$("#avatarUploadForm")[0].reset();
+					$("#avatarModal").modal('hide');
+					$("#my_avatar").attr("src", "/images/avatars/"+obj.photo);
+					$("#my_avatar").hide().fadeIn(300);
+				}else{
+					/**
+					 * TODO: Display error message
+					 */
+				}
+			}
+		}).submit();
+return false;
+});
+	
+	$("a#like_btn").live("click", function(){
+		var photo=$("p#photo_id").attr('data-photo');
+		$.post("like", {photo: photo},
+		function(data){
+			var obj=$.parseJSON(data);
+			if(obj.status){
+				var l_count=$("#likes_count").html();
+				$(".like_btn").attr("title", "You like this!");
+				$(".like_btn").removeAttr("id");
+				$("#likes_count").html(parseInt(l_count)+1).hide().fadeIn(300);
+			}
+		});
+		return false;
+	});
+	
+	$("a#dislike_btn").live("click", function(){
+		var photo=$("p#photo_id").attr('data-photo');
+		$.post("dislike", {photo: photo},
+		function(data){
+			console.log(data);
+		});
+	});
+	
