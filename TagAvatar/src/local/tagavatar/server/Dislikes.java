@@ -1,6 +1,7 @@
 package local.tagavatar.server;
 
 import java.sql.*;
+
 import local.tagavatar.server.Settings;
 import local.tagavatar.server.Likes;
 
@@ -26,5 +27,21 @@ public class Dislikes {
 			return 0;
 		}
 	}
+	
+	public int get_dislikes(int photo){
+		String sql="SELECT * FROM dislikes WHERE photo="+photo;
+		int c=0;
+		try{
+			Statement st=this.con.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			while(rs.next()){
+				c++;
+			}
+			return c;
+		}catch(Exception e){
+			return 0;
+		}
+	}
+	
 	
 }
