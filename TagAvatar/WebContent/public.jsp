@@ -170,7 +170,8 @@
 	<script>
 		$(document).ready(function(){
 			var user=document.URL.split("?")[1].split("=")[1];
-			if(user.substring(user.length=='#'))
+			var last_char=(user.substring(user.length-1,user.length));
+			if(last_char=='#')
 				user=user.substring(0,user.length-1);
 			console.log(user);
 			$.post("publicPhotos", {username: user},
