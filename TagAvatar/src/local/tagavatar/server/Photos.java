@@ -1,7 +1,6 @@
 package local.tagavatar.server;
 
 import java.sql.*;
-
 import local.tagavatar.server.Settings;
 import org.json.*;
 import local.tagavatar.server.Likes;
@@ -73,6 +72,30 @@ public class Photos {
 		}catch(Exception e){
 			json.put("status", false);
 			json.put("message", e.getMessage());
+			return json.toString();
+		}
+	}
+	
+	public String search(String title){
+		String sql="SELECT id, photos.title, photos.desc,photos.photo,photos.user_id FROM photos WHERE photos.title LIKE '%"+title+"%' ";
+		Likes l=new Likes();
+		try{
+			Statement st=this.con.createStatement();
+			JSONArray obj=new JSONArray();
+			ResultSet rs=st.executeQuery(sql);
+			while(rs.next()){
+				JSONObject json=new JSONObject();
+				json.put("title", rs.getString("title"));
+				json.put("desc", rs.getString("desc"));
+				json.put("photo", rs.getString("photo"));
+				json.put("username", rs.getString("user_id"));
+				json.put("likes",l.get_likes(rs.getInt("id")));
+				obj.put(json);
+			}
+			return obj.toString();
+		}catch(Exception e){
+			JSONObject json=new JSONObject();
+			json.put("success", false);
 			return json.toString();
 		}
 	}
