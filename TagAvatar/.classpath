@@ -13,11 +13,11 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="/home/swaroop/Downloads/mysql-connector-java-5.1.22/mysql-connector-java-5.1.22-bin.jar"/>
-	<classpathentry kind="lib" path="/home/swaroop/git/TagAvatar/TagAvatar/WebContent/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
-	<classpathentry kind="lib" path="/home/swaroop/git/TagAvatar/TagAvatar/WebContent/WEB-INF/lib/commons-io-2.4.jar"/>
-	<classpathentry kind="lib" path="/home/swaroop/git/TagAvatar/TagAvatar/WebContent/WEB-INF/lib/imgscalr-lib-4.2.jar"/>
-	<classpathentry kind="lib" path="/home/swaroop/git/TagAvatar/TagAvatar/WebContent/WEB-INF/lib/commons-codec-1.7.jar"/>
-	<classpathentry kind="lib" path="/home/swaroop/git/TagAvatar/TagAvatar/WebContent/WEB-INF/lib/json-rpc-1.0.jar"/>
+	<classpathentry kind="lib" path="/home/sony/jars/commons-codec-1.7.jar"/>
+	<classpathentry kind="lib" path="/home/sony/jars/commons-fileupload-1.2.2.jar"/>
+	<classpathentry kind="lib" path="/home/sony/jars/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="/home/sony/jars/imgscalr-lib-4.2.jar"/>
+	<classpathentry kind="lib" path="/home/sony/jars/json-rpc-1.0.jar"/>
+	<classpathentry kind="lib" path="/home/sony/jars/mysql-connector-java-5.1.22-bin.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

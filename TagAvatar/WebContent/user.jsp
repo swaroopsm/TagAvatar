@@ -145,6 +145,7 @@
 		$(document).ready(function(){
 			$.post("random_pic", function(data){
 				var obj=$.parseJSON(data);
+				console.log(obj);
 				$("#random_pic").html("<img id='my_img' src='/images/"+obj.photo+"' class='thumbnail' style='max-width: 400px;'></img>");
 				$("#pic_title").html(obj.title+"<p style='font-size: 11px;'> by <a href='#'>"+obj.username+"</a></p>");
 				$("#pic_desc").html(obj.desc);

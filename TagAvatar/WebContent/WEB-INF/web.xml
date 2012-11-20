@@ -21,14 +21,14 @@
     <description>Location to store uploaded file</description>
     <param-name>img-upload</param-name>
     <param-value>
-         /home/swaroop/codehub/java/global_img/
+         /home/sony/global_img/
      </param-value>
   </context-param>
   <context-param>
     <description>Location to store uploaded thumbnail image</description>
     <param-name>img-upload-thumb</param-name>
     <param-value>
-         /home/swaroop/codehub/java/global_img/thumbnails/
+         /home/sony/global_img/thumbnails/
      </param-value>
   </context-param>
 </web-app>
