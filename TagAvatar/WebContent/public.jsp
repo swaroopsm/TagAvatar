@@ -174,7 +174,7 @@
 					<span style="color: #777;"><% if(u.get_location()!=""){ out.println(" | "+u.get_location()); } %></span>
 				</p>
 			</div>
-			<div class="well span8" style="background: #fff;">
+			<div class="well span8" style="background: #fff;float: right;margin-right: 20px;">
 			<h4 style='line-height: 0px;'>Photo Stream</h4>
 			<hr class="adjust">
 			<div id="photo_stream" class="rows">
