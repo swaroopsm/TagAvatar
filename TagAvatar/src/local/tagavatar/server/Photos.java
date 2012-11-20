@@ -108,6 +108,8 @@ public class Photos {
 		String sql="SELECT * FROM photos WHERE `user_id`='"+username+"' ORDER BY RAND() LIMIT 3";
 		Photos p=new Photos();
 		JSONArray json=new JSONArray();
+		Likes l=new Likes();
+		Dislikes d=new Dislikes();
 		try{
 			Statement st=this.con.createStatement();
 			ResultSet rs=st.executeQuery(sql);
@@ -117,6 +119,8 @@ public class Photos {
 				j.put("title", rs.getString("title"));
 				j.put("desc", rs.getString("desc"));
 				j.put("photo", rs.getString("photo"));
+				j.put("likes", l.get_likes(rs.getInt("id")));
+				j.put("dislikes", d.get_dislikes(rs.getInt("id")));
 				json.put(j);
 			}
 			return json.toString();
