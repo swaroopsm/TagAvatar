@@ -182,7 +182,7 @@
 				</p>
 			</div>
 			<div class="well span8" style="background: #fff;float: right;margin-right: 20px;">
-			<h4 style='line-height: 0px;'>Photo Stream</h4>
+			<h4 style='line-height: 0px;'>Photo Stream <div id="gallery_link_div"></div></h4>
 			<hr class="adjust">
 			<div id="photo_stream" class="rows">
 				
@@ -244,6 +244,7 @@
 			if(last_char=='#')
 				user=user.substring(0,user.length-1);
 			console.log(user);
+			$("#gallery_link_div").html('<a href="gallery.jsp?username='+user+'" id="gallery_link" class="pull-right" style="font-size: 13px;">View All &raquo;');
 			$.post("publicPhotos", {username: user},
 			function(data){
 				var obj=$.parseJSON(data);
