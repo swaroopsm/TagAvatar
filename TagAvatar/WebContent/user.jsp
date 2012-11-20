@@ -158,12 +158,16 @@
 			$.post("random_pic", function(data){
 				var obj=$.parseJSON(data);
 				var like_link_full="<a href='#' id='like_btn' class='like_btn' title='Like'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
+				var dislike_link_full="<a href='#' id='dislike_btn' class='dislike_btn' title='Dislike'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
 				console.log(obj);
 				if(obj.ilike>0){
 					like_link_full="<a href='#' id='' class='like_btn' title='You like this!'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
 				}
+				if(obj.idislike>0){
+					dislike_link_full="<a href='#' id='' class='dislike_btn' title='You dislike this!'><i class='icon-thumbs-down icon-white'> &nbsp;</i></a> ";
+				}
 				$("#random_pic").html("<img id='my_img' src='/images/"+obj.photo+"' class='thumbnail' style='max-width: 400px;'></img>");
-				$("#pic_title").html(obj.title+"<p style='font-size: 11px;' id='photo_id' data-photo='"+obj.photo_id+"'> by <a href='#'>"+obj.username+"</a></p><p>"+like_link_full+"<span class='like_dislike_count' id='likes_count'>"+obj.likes+"</span>&nbsp;&nbsp;<a href='#' title='Dislike' id='dislike_btn' class='dislike_btn'><i class='icon-thumbs-down icon-white'></i></a></p>");
+				$("#pic_title").html(obj.title+"<p style='font-size: 11px;' id='photo_id' data-photo='"+obj.photo_id+"'> by <a href='#'>"+obj.username+"</a></p><p>"+like_link_full+"<span class='like_dislike_count' id='likes_count'>"+obj.likes+"</span>&nbsp;&nbsp;"+dislike_link_full+"<span class='like_dislike_count' id='dislikes_count'>"+obj.dislikes+"</span></p>");
 				$("#pic_desc").html(obj.desc);
 				$("#random_pic").hide().fadeIn(300);
 				$("#my_img").ready(function(){
