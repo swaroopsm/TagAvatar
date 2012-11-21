@@ -63,6 +63,14 @@ a.home_link:hover{
 	text-decoration: underline;
 }
 
+.title_bg{
+	width: 100%;
+	position: absolute;
+	background: #000;
+	opacity: 0.2;
+	height: 40px;
+}
+
 </style>
 </head>
 <body style="overflow-x: hidden;background: #000; //width: 980px; //margin: 0px auto;"><!-- wrapper element for the large image -->
@@ -145,7 +153,13 @@ $(".items img").live("click", function() {
 		wrap.find("img").attr("src", url);
 	
 	};
+	var p_title=$(this).attr("data-title");
+	$("#ph_title").html('');
+	$("#p_title_bg").removeClass();
+	$("#p_title_bg").html('');
 	$("#img_title").html($(this).attr("data-title")).hide().fadeIn(500);
+	$("#image_wrap").prepend('<span id="p_title_bg" class="title_bg">!</span>');
+	$("#image_wrap").prepend('<span id="ph_title" style="padding-top: 10px;padding-left: 6px;font-family: Trebuchet MS;position: absolute;opacity: 1;color: #fff;">'+p_title+'</span>');
 	// begin loading the image from www.flickr.com
 	img.src = url;
 
