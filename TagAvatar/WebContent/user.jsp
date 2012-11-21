@@ -43,7 +43,7 @@
 		u.my_info((String) session.getAttribute("username"));
 		String avatar=u.get_avatar();
 		String full_pic;
-		if(avatar.equals("")){
+		if(avatar == null){
 			avatar="<i class='icon-user'></i>";
 		}else{
 			avatar="<img src='/images/avatars/small/"+avatar+"' style='max-height: 25px;'/>";
@@ -62,8 +62,8 @@
           </div><!--/.nav-collapse -->
           <ul class="nav pull-right">
           	 <li>
-          	 	<form class="navbar-search pull-right" action="" style="//margin-left: 250px;">
-              		<input type="text" class="search-query span2" placeholder="Search" >
+          	 	<form class="navbar-search pull-right" id="searchForm" action="search.jsp" style="//margin-left: 250px;" method="get">
+              		<input type="text" class="search-query span2" placeholder="Search" id="q" name="q">
            		</form>
           	 </li>
           	 <li class="divider-vertical"></li>
@@ -157,27 +157,26 @@
 		$(document).ready(function(){
 			$.post("random_pic", function(data){
 				var obj=$.parseJSON(data);
-<<<<<<< HEAD
-				console.log(obj);
-=======
+				
 				var like_link_full="<a href='#' id='like_btn' class='like_btn' title='Like'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
 				var dislike_link_full="<a href='#' id='dislike_btn' class='dislike_btn' title='Dislike'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
-				console.log(obj);
+				
 				if(obj.ilike>0){
 					like_link_full="<a href='#' id='' class='like_btn' title='You like this!'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
 				}
 				if(obj.idislike>0){
 					dislike_link_full="<a href='#' id='' class='dislike_btn' title='You dislike this!'><i class='icon-thumbs-down icon-white'> &nbsp;</i></a> ";
 				}
->>>>>>> upstream/master
 				$("#random_pic").html("<img id='my_img' src='/images/"+obj.photo+"' class='thumbnail' style='max-width: 400px;'></img>");
 				$("#pic_title").html(obj.title+"<p><input type='hidden' id='ilike_box' value='"+obj.ilike+"'><input type='hidden' id='idislike_box' value='"+obj.idislike+"'></p><p style='font-size: 11px;' id='photo_id' data-photo='"+obj.photo_id+"'> by <a href='public.jsp?username="+obj.username+"'>"+obj.username+"</a></p><p>"+like_link_full+"<span class='like_dislike_count' id='likes_count'>"+obj.likes+"</span>&nbsp;&nbsp;"+dislike_link_full+"<span class='like_dislike_count' id='dislikes_count'>"+obj.dislikes+"</span></p>");
 				$("#pic_desc").html(obj.desc);
 				$("#random_pic").hide().fadeIn(300);
 				$("#my_img").ready(function(){
-					$("div#pic_info").fadeIn(300);
-				})
+				$("div#pic_info").fadeIn(300);
+				});
 			});
+			
+			
 		});
 	</script>
 	<%
