@@ -3,6 +3,7 @@ package local.tagavatar.server;
 import java.sql.*;
 import org.json.JSONObject;
 import local.tagavatar.server.Settings;
+import local.tagavatar.server.Dislikes;
 
 public class Likes {
 	
@@ -15,11 +16,14 @@ public class Likes {
 	
 	public String create(String username, int photo){
 		String sql="INSERT INTO likes(user_id,photo) VALUES('"+username+"',"+photo+")";
+		Dislikes d=new Dislikes();
 		JSONObject json=new JSONObject();
 		try{
-			Statement st=this.con.createStatement();
-			st.execute(sql);
-			json.put("status", true);
+			if(d.delete(photo, username)==1){
+				Statement st=this.con.createStatement();
+				st.execute(sql);
+				json.put("status", true);
+			}
 			return json.toString();
 		}catch(Exception e){
 			return (json.put("status", false)).toString();

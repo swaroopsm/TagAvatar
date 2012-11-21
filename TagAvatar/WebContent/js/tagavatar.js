@@ -2118,9 +2118,15 @@ return false;
 			var obj=$.parseJSON(data);
 			if(obj.status){
 				var l_count=$("#likes_count").html();
+				var d_count=$("#dislikes_count").html();
+				var i_dislike=$("#idislike_box").val();
 				$(".like_btn").attr("title", "You like this!");
 				$(".like_btn").removeAttr("id");
 				$("#likes_count").html(parseInt(l_count)+1).hide().fadeIn(300);
+				if(i_dislike>0)
+					$("#dislikes_count").html(parseInt(d_count)-1).hide().fadeIn(300);
+				$(".dislike_btn").attr("title", "Dislike");
+				$(".dislike_btn").attr("id","dislike_btn");
 			}
 		});
 		return false;
@@ -2130,7 +2136,18 @@ return false;
 		var photo=$("p#photo_id").attr('data-photo');
 		$.post("dislike", {photo: photo},
 		function(data){
-			console.log(data);
+			if(data==1){
+				var d_count=$("#dislikes_count").html();
+				var l_count=$("#likes_count").html();
+				var i_like=$("#ilike_box").val();
+				$(".dislike_btn").attr("title", "You dislike this!");
+				$(".dislike_btn").removeAttr("id");
+				$("#dislikes_count").html(parseInt(d_count)+1).hide().fadeIn(300);
+				if(i_like>0)
+					$("#likes_count").html(parseInt(l_count)-1).hide().fadeIn(300);
+				$(".like_btn").attr("title", "Like");
+				$(".like_btn").attr("id","like_btn");
+			}
 		});
 	});
 	

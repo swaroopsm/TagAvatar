@@ -1,3 +1,4 @@
+<%@page import="java.io.FileNotFoundException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,20 +35,36 @@
   <body class="body_background">
 	<%
 		try{
-			if(session.getAttribute("loggedin").toString().equals("true")){
-			
+			String username=request.getParameter("username");
 	%>
 	<%@page import="local.tagavatar.server.Users" %>
-	<%
+	<% 	
 		Users u = new Users();
-		u.my_info((String) session.getAttribute("username"));
+		u.my_info(username);
 		String avatar=u.get_avatar();
 		String full_pic;
 		if(avatar.equals("")){
 			avatar="<i class='icon-user'></i>";
+			full_pic="<img src='/images/avatars/default_avatar.gif' class='thumbnail' style='max-height: 250px;' id='my_avatar'/>";
 		}else{
+			full_pic="<img src='/images/avatars/"+avatar+"' class='thumbnail' style='max-height: 250px;' id='my_avatar'/>";
 			avatar="<img src='/images/avatars/small/"+avatar+"' style='max-height: 25px;'/>";
 		}
+	%>
+	<% 
+		try{
+			
+			if(session.getAttribute("loggedin").toString().equals("true")){
+				
+				Users u2=new Users();
+				u2.my_info((String) session.getAttribute("username"));
+				String avatar2=u2.get_avatar();
+				if(avatar2.equals("")){
+					avatar2="<i class='icon-user'></i>";
+				}else{
+					avatar2="<img src='/images/avatars/small/"+avatar2+"' style='max-height: 25px;'/>";
+				}
+		
 	%>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -76,7 +93,7 @@
           	  </li>
              <li class="divider-vertical"></li>
              <li class="dropdown">
-          	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 13px;"><% out.println(avatar); %>&nbsp;<% out.println(session.getAttribute("username")); %><b class="caret"></b></a>
+          	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 13px;"><% out.println(avatar2); %>&nbsp;<% out.println(session.getAttribute("username")); %><b class="caret"></b></a>
               <ul class="dropdown-menu" style="font-size: 13px;">
               	<li><a href="user.jsp">Home</a></li>
                 <li><a href="profile">Profile</a></li>
@@ -89,28 +106,94 @@
         </div>
       </div>
     </div>
-
+	<% 
+		}
+		else{
+	%>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">TagAvatar</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav pull-right">
+             	<a href="login"><button class="btn btn-success" style="font-size: 13px;">Login</button></a> &nbsp; <a href="signup" style="font-size: 11px;color: #888;">New Account?</a>
+             </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+	<%	
+		}
+		}catch(Exception e){
+		%>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">TagAvatar</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav pull-right">
+             	<a href="login"><button class="btn btn-success" style="font-size: 13px;">Login</button></a> &nbsp; <a href="signup" style="font-size: 11px;color: #888;">New Account?</a>
+             </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+		<%
+		}
+	%>
     <div class="container user_dashboard">
 
 <br>
 		<div class="rows">
 			<div id="latest_pic_div">
-				<div class="span6">
-				<div id="random_pic" style="max-height: 400px; max-width: 400px;">
-					<center><img src="img/loader.gif" style="margin-left: 200px;position: absolute;"/></center>
+				<div class="span3">
+				<div id="random_pic" style="max-height: 400px; max-width: 2x00px;">
+					<% out.println(full_pic); %>
 				</div>
+				<br>
 			</div>
-			<div class="span5 well" style="display: none;" id="pic_info">
-				<h4 id="pic_title">Photo Title</h4>
-				<hr class="adjust">
-				<p id="pic_desc">Photo Description...</p>
+			<div class="span8 well" style="background: #fff;" id="about_info">
+				<h4 style="line-height: 0px;"><% out.println(u.get_name()); %></h4>
+				<hr>
+				<p style="color: #777;"><i><% out.println(u.get_bio()); %></i></p>
+				<p style="font-size: 11px;">
+					<a href="<% out.println(u.get_url()); %>" target="_BLANK" ><% out.println(u.get_url()); %> </a>
+					<span style="color: #777;"><% if(u.get_location()!=""){ out.println(" | "+u.get_location()); } %></span>
+				</p>
 			</div>
+			<div class="well span8" style="background: #fff;float: right;margin-right: 20px;">
+			<h4 style='line-height: 0px;'>Photo Stream <div id="gallery_link_div"></div></h4>
+			<hr class="adjust">
+			<div id="photo_stream" class="rows">
+				
+			</div>
+		</div>
 			</div>
 			<div class="span12">
 				<hr style="width: 900px;">
 			</div>
 		</div>
-		
+		<% try{ if(session.getAttribute("username").toString().equals("true")){ %>
 		<!-- Photo Modal -->
 			<div id="photoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
 			  <div class="modal-header">
@@ -143,6 +226,7 @@
 			  </form>
 			</div>
 		<!-- End Photo Modal -->
+		<% }}catch(Exception e){} %>
 		
 		
     </div> <!-- /container -->
@@ -155,39 +239,27 @@
 	<script src="js/tagavatar.js"></script>
 	<script>
 		$(document).ready(function(){
-			$.post("random_pic", function(data){
+			var user=document.URL.split("?")[1].split("=")[1];
+			var last_char=(user.substring(user.length-1,user.length));
+			if(last_char=='#')
+				user=user.substring(0,user.length-1);
+			console.log(user);
+			$("#gallery_link_div").html('<a href="gallery.jsp?username='+user+'" id="gallery_link" class="pull-right" style="font-size: 13px;">View All &raquo;');
+			$.post("publicPhotos", {username: user},
+			function(data){
 				var obj=$.parseJSON(data);
-<<<<<<< HEAD
-				console.log(obj);
-=======
-				var like_link_full="<a href='#' id='like_btn' class='like_btn' title='Like'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
-				var dislike_link_full="<a href='#' id='dislike_btn' class='dislike_btn' title='Dislike'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
-				console.log(obj);
-				if(obj.ilike>0){
-					like_link_full="<a href='#' id='' class='like_btn' title='You like this!'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
+				$("#photo_stream").html('');
+				for(var i=0;i<obj.length;i++){
+					$("#photo_stream").append("<div class='span2' style='padding-right: 40px;'><a href='#'><img src='/images/thumbnails/"+obj[i].photo+"' style='max-width: 180px;min-height: 140px;max-height: 140px;' class='thumbnail'></img></a><center><h4 title='"+obj[i].likes+" like(s)'><i class='icon-thumbs-up' style='background-position: -105px -144px;'></i> <span class='like_dislike_count' style='font-size: 14px;margin-top: -2px;position: absolute;margin-left: 4px;' id='likes_count'>"+obj[i].likes+"</h4> <h4 style='position: absolute;margin-left: 100px;margin-top: -34px;' title='"+obj[i].dislikes+" dislike(s)'><i class='icon-thumbs-down' style='background-position: -134px -144px;'></i> <span class='like_dislike_count' style='font-size: 14px;margin-top: -4px;margin-left: 0px;' id='dislikes_count'>"+obj[i].dislikes+"</h4></center></div>");
 				}
-				if(obj.idislike>0){
-					dislike_link_full="<a href='#' id='' class='dislike_btn' title='You dislike this!'><i class='icon-thumbs-down icon-white'> &nbsp;</i></a> ";
-				}
->>>>>>> upstream/master
-				$("#random_pic").html("<img id='my_img' src='/images/"+obj.photo+"' class='thumbnail' style='max-width: 400px;'></img>");
-				$("#pic_title").html(obj.title+"<p><input type='hidden' id='ilike_box' value='"+obj.ilike+"'><input type='hidden' id='idislike_box' value='"+obj.idislike+"'></p><p style='font-size: 11px;' id='photo_id' data-photo='"+obj.photo_id+"'> by <a href='public.jsp?username="+obj.username+"'>"+obj.username+"</a></p><p>"+like_link_full+"<span class='like_dislike_count' id='likes_count'>"+obj.likes+"</span>&nbsp;&nbsp;"+dislike_link_full+"<span class='like_dislike_count' id='dislikes_count'>"+obj.dislikes+"</span></p>");
-				$("#pic_desc").html(obj.desc);
-				$("#random_pic").hide().fadeIn(300);
-				$("#my_img").ready(function(){
-					$("div#pic_info").fadeIn(300);
-				})
+				console.log(obj);
 			});
 		});
 	</script>
 	<%
 		}
-			else{
-				response.sendRedirect("login.jsp");
-			}	
-		}
 		catch(Exception e){
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("user.jsp");
 		}
 	%>
   </body>
