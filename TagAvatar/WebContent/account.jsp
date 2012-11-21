@@ -130,6 +130,7 @@
 					      <button type="submit" class="btn btn-success" id="update_account_btn">Update &raquo;</button>
 					    </div>
 					  </div>
+					  <center><img id="loader" src="img/loader.gif" style="display: none;"/></center>
 				</form>
 			</div>
 			</div>
