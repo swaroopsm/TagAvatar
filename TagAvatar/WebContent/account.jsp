@@ -107,6 +107,7 @@
 				<h4 id="pic_title">Account</h4>
 				<hr class="adjust">
 				<form class="form form-horizontal">
+					<div id="js-messages"></div>
 					<div class="control-group">
 					    <label class="control-label" for="inputName">Username: </label>
 					    <div class="controls">
