@@ -137,14 +137,13 @@
 			  <div class="modal-header">
 			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>			    
 			  </div>
-			   <div class="modal-body" id="afterUpload" style="display: none;"></div>
 			   <div class="modal-body">
 				  <img src="/images/dfccdeb9eda2e2d8fe58a86f262681de.png" id="largePhotoImg" />
 			  </div>
 			  <div class="modal-footer">			    
 			    <center><div id="loader" style="display: none;"><img src="img/loader.gif" style="position: absolute;"/></div></center>
 			  </div>
-			  </form>
+			  
 			</div>
 		<!-- End Large Photo Modal -->
 		
@@ -170,8 +169,7 @@
 				$("#container").append('<div id="largePhotoModal'+obj[i].photo+'" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">' +
 						 ' <div class="modal-header">'+
 						    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>	'+		    
-						  '</div>'+
-						   '<div class="modal-body" id="afterUpload" style="display: none;"></div>'+
+						  '</div>'+			
 						   '<div class="modal-body">'+
 							 ' <img src="/images/'+obj[i].photo+'" id="largePhotoImg" />'+
 						  '</div>'+
