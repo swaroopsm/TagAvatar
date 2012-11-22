@@ -84,6 +84,7 @@
               	<li><a href="user.jsp">Home</a></li>
                 <li><a href="profile">Profile</a></li>
                 <li><a href="photos">My Photos</a></li>
+                <li><a href="account.jsp">Account</a></li>
                 <li class="divider"></li>
                 <li><a href="logout">Log out!</a></li>
               </ul>
