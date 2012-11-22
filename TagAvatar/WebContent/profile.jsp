@@ -110,6 +110,7 @@
 				<h4 id="pic_title">Profile</h4>
 				<hr class="adjust">
 				<form class="form form-horizontal">
+					<div id="js-messages"></div>
 					<div class="control-group">
 					    <label class="control-label" for="inputName">Name: </label>
 					    <div class="controls">
@@ -145,6 +146,7 @@
 					      <button type="submit" class="btn btn-success" id="update_profile_btn">Update &raquo;</button>
 					    </div>
 					  </div>
+					  <div id="loader" style="text-align: center;display: none;"><img src="img/loader.gif" /></div>
 				</form>
 			</div>
 			</div>
