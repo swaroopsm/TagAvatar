@@ -131,4 +131,32 @@ public class Photos {
 		}
 	}
 	
+	public String get_latest_photos(){
+		String sql="SELECT `title`,`desc`,`photo` FROM photos ORDER BY id DESC";
+		JSONArray j=new JSONArray();
+		try{
+			Likes l=new Likes();
+			Dislikes d=new Dislikes();
+			Statement st=this.con.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			while(rs.next()){
+				JSONObject json=new JSONObject();
+				json.put("status", true);
+				json.put("title", rs.getString("title"));
+				json.put("photo", rs.getString("photo"));
+				json.put("desc", rs.getString("desc"));
+				json.put("username", rs.getString("user_id"));
+				json.put("photo_id", rs.getInt("id"));
+				json.put("likes", l.get_likes(rs.getInt("id")));
+				json.put("dislikes", d.get_dislikes(rs.getInt("id")));
+			}
+			return j.toString();
+		}catch(Exception e){
+			JSONObject json=new JSONObject();
+			json.put("status", false);
+			json.put("message", e.getMessage());
+			return json.toString();
+		}
+	}
+	
 }
