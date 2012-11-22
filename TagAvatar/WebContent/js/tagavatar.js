@@ -2151,3 +2151,24 @@ return false;
 		});
 	});
 	
+	$("#update_account_btn").click(function(){
+		var oldp=$.trim($("#inputOldPwd").val());
+		var newp=$.trim($("#inputNewPwd").val());
+		if(oldp=='' || newp==''){
+			$("#js-messages").html("<center><span class='span6 alert alert-danger'><a class='close' data-dismiss='alert' href='#'>&times;</a>Please fill all fields...<br></span></center>").hide().fadeIn(500);
+		}else{
+			$("#loader").show()
+			$.post("updateAccount", {oldp: oldp, newp: newp},
+			function(data){
+				var obj=$.parseJSON(data);
+				if(obj.status){
+					$("#js-messages").html("<center><span class='span6 alert alert-success'><a class='close' data-dismiss='alert' href='#'>&times;</a>"+obj.message+"</span></center><br>").hide().fadeIn(500);
+				}else{
+					$("#js-messages").html("<center><span class='span6 alert alert-danger'><a class='close' data-dismiss='alert' href='#'>&times;</a>"+obj.message+"<br></span></center>").hide().fadeIn(500);
+				}
+			});
+		}
+		$("#loader").fadeOut(500);
+		return false;
+	});
+	
