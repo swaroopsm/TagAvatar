@@ -115,7 +115,8 @@
 				console.log(obj);
 				$("#photoContainer").html("<legend> Search results for '"+queryString+"' </legend>");
 				for(var i=0;i<obj.length;i++)					
-					$("#photoContainer").append("<img class = 'thumbnail' style='display:block;float:left;margin-right:10px;margin-bottom:10px;' id='searchImg' src='/images/thumbnails/"+obj[i].photo+"'/>").fadeIn(1000);
+					$("#photoContainer").append("<a href='#'><img class = 'thumbnail' style='display:block;float:left;margin-right:20px;margin-bottom:10px;max-width: 180px;min-height: 140px;max-height: 140px;' id='searchImg' src='/images/thumbnails/"+obj[i].photo+"'/></a>").hide();
+				$("#photoContainer").fadeIn(300);
 			});
 			
 			$("#searchForm").submit(function(){
