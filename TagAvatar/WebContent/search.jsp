@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta charset="utf-8">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
     <title>TagAvatar</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -32,7 +32,7 @@
   </head>
 
   <body class="body_background">
-    <%
+	<%
 		try{
 			if(session.getAttribute("loggedin").toString().equals("true")){
 			
@@ -48,7 +48,6 @@
 		}else{
 			avatar="<img src='/images/avatars/small/"+avatar+"' style='max-height: 25px;'/>";
 		}
-		
 	%>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -63,8 +62,8 @@
           </div><!--/.nav-collapse -->
           <ul class="nav pull-right">
           	 <li>
-          	 	<form class="navbar-search pull-right" id="searchForm" action="" style="//margin-left: 250px;">
-              		<input type="text" class="search-query span2" placeholder="Search" id="titleString" name="q">
+          	 	<form class="navbar-search pull-right" id="searchForm" action="search.jsp" style="//margin-left: 250px;" method="get">
+              		<input type="text" class="search-query span2" placeholder="Search" id="q" name="q">
            		</form>
           	 </li>
           	 <li class="divider-vertical"></li>
@@ -82,6 +81,7 @@
               	<li><a href="user.jsp">Home</a></li>
                 <li><a href="profile">Profile</a></li>
                 <li><a href="photos">My Photos</a></li>
+                <li><a href="account.jsp">Account</a></li>
                 <li class="divider"></li>
                 <li><a href="logout">Log out!</a></li>
               </ul>
@@ -90,11 +90,65 @@
         </div>
       </div>
     </div>
- 	
- 	<div class="container user_dashboard" id="photoContainer">		
+
+    <div class="container user_dashboard" id="container">
+
+<br>
+		<div id="photoContainer">
+			
+		</div> <!-- /photoContainer -->
+		
+		<!-- Photo Modal -->
+			<div id="photoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			    <h3 id="photoModalLabel">Add new photo</h3>
+			  </div>
+			   <div class="modal-body" id="afterUpload" style="display: none;"></div>
+			   <form class="form-horizontal" id="photoUploadForm" method="POST" action="PhotoUpload" enctype="multipart/form-data">
+			  <div class="modal-body">
+				  <div class="control-group">
+				    <div class="controls">
+				      <input type="text" id="photoTitle" name="photoTitle" placeholder="Title">
+				    </div>
+				  </div>
+				  <div class="control-group">
+				    <div class="controls">
+				      <textarea rows="4" class="span3" id="photoDesc" name="photoDesc" placeholder="Description"></textarea>
+				    </div>
+				  </div>
+				  <div class="control-group">
+				    <div class="controls">
+				      <input type="file" id="file" name="file">
+				    </div>
+				  </div>
+			  </div>
+			  <div class="modal-footer">
+			    <input type="submit" class="btn btn-success" id="uploadPhotoButton" value="Upload Photo &raquo;" />
+			    <center><div id="loader" style="display: none;"><img src="img/loader.gif" style="position: absolute;"/></div></center>
+			  </div>
+			  </form>
+			</div>
+		<!-- End Photo Modal -->
+		
+		
+		<!-- Large Photo Modal -->
+			<div id="largePhotoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>			    
+			  </div>
+			   <div class="modal-body" id="afterUpload" style="display: none;"></div>
+			   <div class="modal-body">
+				  <img src="/images/dfccdeb9eda2e2d8fe58a86f262681de.png" id="largePhotoImg" />
+			  </div>
+			  <div class="modal-footer">			    
+			    <center><div id="loader" style="display: none;"><img src="img/loader.gif" style="position: absolute;"/></div></center>
+			  </div>
+			  </form>
+			</div>
+		<!-- End Large Photo Modal -->
 		
     </div> <!-- /container -->
-   
 
     <!-- Le javascript
     ================================================== -->
@@ -103,33 +157,44 @@
 	<script src="js/jquery.form.js"></script>
 	<script src="js/tagavatar.js"></script>
 	<script>
-	function searchImg(){
-		console.log("this it test");
-	}
-		$(document).ready(function(){
-			var queryString=document.URL.split("?")[1].split("=")[1];
-			
-			// get photos via ajax and display them
-			$.post("searchPhotos", {title:queryString}, function(data){
+	$(document).ready(function(){
+		var queryString=document.URL.split("?")[1].split("=")[1];
+		
+		// get photos via ajax and display them
+		$.post("searchPhotos", {title:queryString}, function(data){
+			var obj = $.parseJSON(data);
+			console.log(obj);
+			$("#photoContainer").html("<legend> Search results for '"+queryString+"' </legend>");
+			for(var i=0;i<obj.length;i++)		{			
+				$("#photoContainer").append("<a id='searchImgLink' href='#largePhotoModal"+obj[i].photo+"' data-toggle='modal'><img class = 'thumbnail' style='display:block;float:left;margin-right:10px;margin-bottom:10px;' id='searchImg' src='/images/thumbnails/"+obj[i].photo+"'/> </a>").fadeIn(1000);
+				$("#container").append('<div id="largePhotoModal'+obj[i].photo+'" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">' +
+						 ' <div class="modal-header">'+
+						    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>	'+		    
+						  '</div>'+
+						   '<div class="modal-body" id="afterUpload" style="display: none;"></div>'+
+						   '<div class="modal-body">'+
+							 ' <img src="/images/'+obj[i].photo+'" id="largePhotoImg" />'+
+						  '</div>'+
+						  '<div class="modal-footer">'+			    
+						   ' <center><div id="loader" style="display: none;"><img src="img/loader.gif" style="position: absolute;"/></div></center>'+
+						  '</div>'+						  
+						'</div>');
+			}
+			return false;
+		});
+		
+		$("#searchForm").submit(function(){
+			var searchTitle = $("#titleString").val();
+			$.post("searchPhotos", {title:searchTitle}, function(data){
 				var obj = $.parseJSON(data);
-				console.log(obj);
-				$("#photoContainer").html("<legend> Search results for '"+queryString+"' </legend>");
-				for(var i=0;i<obj.length;i++)					
-					$("#photoContainer").append("<img class = 'thumbnail' style='display:block;float:left;margin-right:10px;margin-bottom:10px;' id='searchImg' src='/images/thumbnails/"+obj[i].photo+"'/>").fadeIn(1000);
+				console.log(obj);					
 			});
 			
-			$("#searchForm").submit(function(){
-				var searchTitle = $("#titleString").val();
-				$.post("searchPhotos", {title:searchTitle}, function(data){
-					var obj = $.parseJSON(data);
-					console.log(obj);					
-				});
-				
-			});	
-			
-			
-			
-		});
+		});	
+		
+		
+		
+	});
 	</script>
 	<%
 		}
