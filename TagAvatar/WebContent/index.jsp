@@ -65,5 +65,18 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery.js"></script>
+	<script>
+		$(document).ready(function(){
+			$.post("/TagAvatar/latestPhotos", function(data){
+				var obj=$.parseJSON(data);
+				
+				/**
+				** TODO: Arun, you need to display the photos on main page.. obj consists of the json array!!
+				*/
+				
+				console.log(obj);
+			});
+		});
+	</script>
   </body>
 </html>
