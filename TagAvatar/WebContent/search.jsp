@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="utf-8">
     <title>TagAvatar</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -32,7 +32,7 @@
   </head>
 
   <body class="body_background">
-	<%
+    <%
 		try{
 			if(session.getAttribute("loggedin").toString().equals("true")){
 			
@@ -48,6 +48,7 @@
 		}else{
 			avatar="<img src='/images/avatars/small/"+avatar+"' style='max-height: 25px;'/>";
 		}
+		
 	%>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -62,8 +63,8 @@
           </div><!--/.nav-collapse -->
           <ul class="nav pull-right">
           	 <li>
-          	 	<form class="navbar-search pull-right" id="searchForm" action="search.jsp" style="//margin-left: 250px;" method="get">
-              		<input type="text" class="search-query span2" placeholder="Search" id="q" name="q">
+          	 	<form class="navbar-search pull-right" id="searchForm" action="" style="//margin-left: 250px;">
+              		<input type="text" class="search-query span2" placeholder="Search" id="titleString" name="q">
            		</form>
           	 </li>
           	 <li class="divider-vertical"></li>
@@ -81,7 +82,6 @@
               	<li><a href="user.jsp">Home</a></li>
                 <li><a href="profile">Profile</a></li>
                 <li><a href="photos">My Photos</a></li>
-                <li><a href="account.jsp">Account</a></li>
                 <li class="divider"></li>
                 <li><a href="logout">Log out!</a></li>
               </ul>
@@ -90,63 +90,11 @@
         </div>
       </div>
     </div>
-
-    <div class="container user_dashboard">
-
-<br>
-		<div class="rows">
-			<div id="latest_pic_div">
-				<div class="span6">
-				<div id="random_pic" style="max-height: 400px; max-width: 400px;">
-					<center><img src="img/loader.gif" style="margin-left: 200px;position: absolute;"/></center>
-				</div>
-			</div>
-			<div class="span5 well" style="display: none;" id="pic_info">
-				<h4 id="pic_title">Photo Title</h4>
-				<hr class="adjust">
-				<p id="pic_desc">Photo Description...</p>
-			</div>
-			</div>
-			<div class="span12">
-				<hr style="width: 900px;">
-			</div>
-		</div>
-		
-		<!-- Photo Modal -->
-			<div id="photoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
-			  <div class="modal-header">
-			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			    <h3 id="photoModalLabel">Add new photo</h3>
-			  </div>
-			   <div class="modal-body" id="afterUpload" style="display: none;"></div>
-			   <form class="form-horizontal" id="photoUploadForm" method="POST" action="PhotoUpload" enctype="multipart/form-data">
-			  <div class="modal-body">
-				  <div class="control-group">
-				    <div class="controls">
-				      <input type="text" id="photoTitle" name="photoTitle" placeholder="Title">
-				    </div>
-				  </div>
-				  <div class="control-group">
-				    <div class="controls">
-				      <textarea rows="4" class="span3" id="photoDesc" name="photoDesc" placeholder="Description"></textarea>
-				    </div>
-				  </div>
-				  <div class="control-group">
-				    <div class="controls">
-				      <input type="file" id="file" name="file">
-				    </div>
-				  </div>
-			  </div>
-			  <div class="modal-footer">
-			    <input type="submit" class="btn btn-success" id="uploadPhotoButton" value="Upload Photo &raquo;" />
-			    <center><div id="loader" style="display: none;"><img src="img/loader.gif" style="position: absolute;"/></div></center>
-			  </div>
-			  </form>
-			</div>
-		<!-- End Photo Modal -->
-		
+ 	
+ 	<div class="container user_dashboard" id="photoContainer">		
 		
     </div> <!-- /container -->
+   
 
     <!-- Le javascript
     ================================================== -->
@@ -155,27 +103,30 @@
 	<script src="js/jquery.form.js"></script>
 	<script src="js/tagavatar.js"></script>
 	<script>
+	function searchImg(){
+		console.log("this it test");
+	}
 		$(document).ready(function(){
-			$.post("random_pic", function(data){
-				var obj=$.parseJSON(data);
-				
-				var like_link_full="<a href='#' id='like_btn' class='like_btn' title='Like'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
-				var dislike_link_full="<a href='#' id='dislike_btn' class='dislike_btn' title='Dislike'><i class='icon-thumbs-down icon-white'> &nbsp;</i></a> ";
+			var queryString=document.URL.split("?")[1].split("=")[1];
+			
+			// get photos via ajax and display them
+			$.post("searchPhotos", {title:queryString}, function(data){
+				var obj = $.parseJSON(data);
 				console.log(obj);
-				if(obj.ilike>0){
-					like_link_full="<a href='#' id='' class='like_btn' title='You like this!'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
-				}
-				if(obj.idislike>0){
-					dislike_link_full="<a href='#' id='' class='dislike_btn' title='You dislike this!'><i class='icon-thumbs-down icon-white'> &nbsp;</i></a> ";
-				}
-				$("#random_pic").html("<img id='my_img' src='/images/"+obj.photo+"' class='thumbnail' style='max-width: 400px;'></img>");
-				$("#pic_title").html(obj.title+"<p><input type='hidden' id='ilike_box' value='"+obj.ilike+"'><input type='hidden' id='idislike_box' value='"+obj.idislike+"'></p><p style='font-size: 11px;' id='photo_id' data-photo='"+obj.photo_id+"'> by <a href='public.jsp?username="+obj.username+"'>"+obj.username+"</a></p><p>"+like_link_full+"<span class='like_dislike_count' id='likes_count'>"+obj.likes+"</span>&nbsp;&nbsp;"+dislike_link_full+"<span class='like_dislike_count' id='dislikes_count'>"+obj.dislikes+"</span></p>");
-				$("#pic_desc").html(obj.desc);
-				$("#random_pic").hide().fadeIn(300);
-				$("#my_img").ready(function(){
-				$("div#pic_info").fadeIn(300);
-				});
+				$("#photoContainer").html("<legend> Search results for '"+queryString+"' </legend>");
+				for(var i=0;i<obj.length;i++)					
+					$("#photoContainer").append("<img class = 'thumbnail' style='display:block;float:left;margin-right:10px;margin-bottom:10px;' id='searchImg' src='/images/thumbnails/"+obj[i].photo+"'/>").fadeIn(1000);
 			});
+			
+			$("#searchForm").submit(function(){
+				var searchTitle = $("#titleString").val();
+				$.post("searchPhotos", {title:searchTitle}, function(data){
+					var obj = $.parseJSON(data);
+					console.log(obj);					
+				});
+				
+			});	
+			
 			
 			
 		});
