@@ -106,7 +106,6 @@ public class Photos {
 	
 	public String get_less_photos(String username){
 		String sql="SELECT * FROM photos WHERE `user_id`='"+username+"' ORDER BY RAND() LIMIT 3";
-		Photos p=new Photos();
 		JSONArray json=new JSONArray();
 		Likes l=new Likes();
 		Dislikes d=new Dislikes();
@@ -132,30 +131,27 @@ public class Photos {
 	}
 	
 	public String get_latest_photos(){
-		String sql="SELECT `title`,`desc`,`photo` FROM photos ORDER BY id DESC";
-		JSONArray j=new JSONArray();
+		String sql="SELECT * FROM photos ORDER BY id DESC";
 		try{
 			Likes l=new Likes();
 			Dislikes d=new Dislikes();
+			JSONArray j=new JSONArray();
 			Statement st=this.con.createStatement();
 			ResultSet rs=st.executeQuery(sql);
 			while(rs.next()){
 				JSONObject json=new JSONObject();
-				json.put("status", true);
 				json.put("title", rs.getString("title"));
-				json.put("photo", rs.getString("photo"));
+				json.put("user_id", rs.getString("user_id"));
 				json.put("desc", rs.getString("desc"));
-				json.put("username", rs.getString("user_id"));
-				json.put("photo_id", rs.getInt("id"));
+				json.put("photo", rs.getString("photo"));
 				json.put("likes", l.get_likes(rs.getInt("id")));
 				json.put("dislikes", d.get_dislikes(rs.getInt("id")));
+				j.put(json);
 			}
 			return j.toString();
 		}catch(Exception e){
-			JSONObject json=new JSONObject();
-			json.put("status", false);
-			json.put("message", e.getMessage());
-			return json.toString();
+			JSONObject j2=new JSONObject();
+			return j2.put("error", e.getMessage()).toString();
 		}
 	}
 	
