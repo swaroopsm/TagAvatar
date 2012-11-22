@@ -185,23 +185,42 @@ public class Users {
 	public String update_account(String username, String opwd, String npwd){
 		String sql="SELECT `password` FROM users WHERE username='"+username+"'";
 		JSONObject json=new JSONObject();
+		String p=null;
 		try{
 			Statement st=this.con.createStatement();
 			ResultSet rs=st.executeQuery(sql);
 			int c=0;
 			while(rs.next()){
+				p=rs.getString("password");
 				c++;
 			}
 			if(c>0){
-				
-				return "";
+				if(p.equals(opwd)){
+					String sql2="UPDATE users SET password='"+npwd+"'";
+					try{
+						Statement st2=this.con.createStatement();
+						st.executeUpdate(sql2);
+						json.put("status", true);
+						json.put("message", "Password updated successfully..");
+						return json.toString();
+					}catch(Exception e){
+						json.put("status", false);
+						json.put("message", e.getMessage());
+						return json.toString();
+					}
+				}
+				else{
+					json.put("status", false);
+					json.put("message", "Old password is incorrect!");
+					return json.toString();
+				}
 			}else{
-				json.put("status", "error");
+				json.put("status", false);
 				json.put("message", "Old password is incorrect!");
 				return json.toString();
 			}
 		}catch(Exception e){
-			json.put("status", "error");
+			json.put("status", false);
 			json.put("message", e.getMessage());
 			return json.toString();
 		}
