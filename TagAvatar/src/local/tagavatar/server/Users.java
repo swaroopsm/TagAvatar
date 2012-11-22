@@ -196,7 +196,7 @@ public class Users {
 			}
 			if(c>0){
 				if(p.equals(opwd)){
-					String sql2="UPDATE users SET password='"+npwd+"'";
+					String sql2="UPDATE users SET password='"+npwd+"' WHERE username='"+username+"'";
 					try{
 						Statement st2=this.con.createStatement();
 						st.executeUpdate(sql2);
