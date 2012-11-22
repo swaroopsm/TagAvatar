@@ -165,7 +165,7 @@
 			console.log(obj);
 			$("#photoContainer").html("<legend> Search results for '"+queryString+"' </legend>");
 			for(var i=0;i<obj.length;i++)		{			
-				$("#photoContainer").append("<a id='searchImgLink' href='#largePhotoModal"+obj[i].photo+"' data-toggle='modal'><img class = 'thumbnail' style='display:block;float:left;margin-right:10px;margin-bottom:10px;' id='searchImg' src='/images/thumbnails/"+obj[i].photo+"'/> </a>").fadeIn(1000);
+				$("#photoContainer").append("<a id='searchImgLink' href='#largePhotoModal"+obj[i].photo+"' data-toggle='modal'><img class = 'thumbnail' style='display:block;float:left;margin-right:10px;margin-bottom:10px;height:100px;' id='searchImg' src='/images/thumbnails/"+obj[i].photo+"'/> </a>").fadeIn(1000);
 				$("#container").append('<div id="largePhotoModal'+obj[i].photo+'" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">' +
 						 ' <div class="modal-header">'+
 						    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>	'+		    
