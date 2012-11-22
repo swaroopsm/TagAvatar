@@ -9,4 +9,5 @@ bin
 
 .classpath
 Settings.java
-
+web.xml
+.classpath
