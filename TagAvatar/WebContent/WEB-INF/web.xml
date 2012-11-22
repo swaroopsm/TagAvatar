@@ -35,7 +35,7 @@
     <description>Location to store uploaded avatar</description>
     <param-name>avatar-upload</param-name>
     <param-value>
-         /home/swaroop/codehub/java/global_img/avatars/
+         /home/sony/global_img/avatars/
      </param-value>
   </context-param>
   <servlet>
@@ -50,7 +50,7 @@
     <description>Location to store small uploaded avatar</description>
     <param-name>avatar-upload-small</param-name>
     <param-value>
-         /home/swaroop/codehub/java/global_img/avatars/small/
+         /home/sony/global_img/avatars/small/
      </param-value>
   </context-param>
 </web-app>

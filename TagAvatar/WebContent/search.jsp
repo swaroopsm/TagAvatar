@@ -103,6 +103,9 @@
 	<script src="js/jquery.form.js"></script>
 	<script src="js/tagavatar.js"></script>
 	<script>
+	function searchImg(){
+		console.log("this it test");
+	}
 		$(document).ready(function(){
 			var queryString=document.URL.split("?")[1].split("=")[1];
 			
@@ -110,25 +113,20 @@
 			$.post("searchPhotos", {title:queryString}, function(data){
 				var obj = $.parseJSON(data);
 				console.log(obj);
-				$("#photoContainer").html("");
+				$("#photoContainer").html("<legend> Search results for '"+queryString+"' </legend>");
 				for(var i=0;i<obj.length;i++)					
-					$("#photoContainer").append("<a href=''><img class = 'thumbnail' style='float:left;margin-left:5px;' src='/images/thumbnails/"+obj[i].photo+"' /></a>").fadeIn();
+					$("#photoContainer").append("<img class = 'thumbnail' style='display:block;float:left;margin-right:10px;margin-bottom:10px;' id='searchImg' src='/images/thumbnails/"+obj[i].photo+"'/>").fadeIn(1000);
 			});
 			
 			$("#searchForm").submit(function(){
 				var searchTitle = $("#titleString").val();
 				$.post("searchPhotos", {title:searchTitle}, function(data){
 					var obj = $.parseJSON(data);
-					console.log(obj);
-					
-					
+					console.log(obj);					
 				});
 				
 			});	
 			
-			$("#searchImg").hover(function(){
-				 $(this).stop().animate({opacity: "0.8"}, 'slow');
-			});
 			
 			
 		});

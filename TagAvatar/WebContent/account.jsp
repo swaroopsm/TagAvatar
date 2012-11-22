@@ -44,9 +44,9 @@
 		u.my_info((String) session.getAttribute("username"));
 		String avatar=u.get_avatar();
 		String full_pic;
-		if(avatar == null){
+		if(avatar.equals("")){
 			avatar="<i class='icon-user'></i>";
-			full_pic="<img src='/images/avatars/default_avatar.png' class='thumbnail' style='max-height: 250px;' id='my_avatar'/>";
+			full_pic="<img src='/images/avatars/default_avatar.gif' class='thumbnail' style='max-height: 250px;' id='my_avatar'/>";
 		}else{
 			full_pic="<img src='/images/avatars/"+avatar+"' class='thumbnail' style='max-height: 250px;' id='my_avatar'/>";
 			avatar="<img src='/images/avatars/small/"+avatar+"' style='max-height: 25px;'/>";
@@ -102,48 +102,35 @@
 				<div id="random_pic" style="max-height: 400px; max-width: 250px;">
 					<% out.println(full_pic); %>
 				</div>
-				<br>
-				<center><button class="btn btn-danger" href="#avatarModal" data-toggle="modal">Update Avatar &raquo;</button></center>
 			</div>
 			<div class="span7 well" id="pic_info">
-				<h4 id="pic_title">Profile</h4>
+				<h4 id="pic_title">Account</h4>
 				<hr class="adjust">
 				<form class="form form-horizontal">
 					<div class="control-group">
-					    <label class="control-label" for="inputName">Name: </label>
+					    <label class="control-label" for="inputName">Username: </label>
 					    <div class="controls">
-					      <input type="text" id="inputName" placeholder="Name" value="<% out.println(u.get_name()); %>">
+					      <input type="text" id="inputName" placeholder="Name" disabled="disabled" value="<% out.println((String) session.getAttribute("username")); %>">
 					    </div>
 					  </div>
 					<div class="control-group">
-					    <label class="control-label" for="inputEmail">Email: </label>
+					    <label class="control-label" for="inputOldPwd">Old Password: </label>
 					    <div class="controls">
-					      <input type="text" id="inputEmail" placeholder="Email" value="<% out.println(u.get_email()); %>">
+					      <input type="password" id="inputOldPwd" placeholder="Old Password" value="">
 					    </div>
 					  </div>
 					  <div class="control-group">
-					    <label class="control-label" for="inputBio">Bio: </label>
+					    <label class="control-label" for="inputNewPwd">New Password: </label>
 					    <div class="controls">
-					      <textarea class="span3" rows="5" id="inputBio"><% out.println(u.get_bio()); %></textarea>
-					    </div>
-					  </div>
-					  <div class="control-group">
-					    <label class="control-label" for="inputUrl">Website: </label>
-					    <div class="controls">
-					      <input type="text" id="inputUrl" placeholder="Website" value="<% out.println(u.get_url()); %>">
-					    </div>
-					  </div>
-					  <div class="control-group">
-					    <label class="control-label" for="inputLocation">Location: </label>
-					    <div class="controls">
-					      <input type="text" id="inputLocation" placeholder="Your City, Country" value="<% out.println(u.get_location()); %>">
+					      <input type="password" id="inputNewPwd" placeholder="New Password" value="">
 					    </div>
 					  </div>
 					  <div class="control-group">
 					    <div class="controls">
-					      <button type="submit" class="btn btn-success" id="update_profile_btn">Update &raquo;</button>
+					      <button type="submit" class="btn btn-success" id="update_account_btn">Update &raquo;</button>
 					    </div>
 					  </div>
+					  <center><img id="loader" src="img/loader.gif" style="display: none;"/></center>
 				</form>
 			</div>
 			</div>
@@ -184,32 +171,6 @@
 			  </form>
 			</div>
 		<!-- End Photo Modal -->
-		
-		
-		
-		<!-- Avatar Modal -->
-			<div id="avatarModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
-			  <div class="modal-header">
-			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			    <h3 id="photoModalLabel">Update Avatar</h3>
-			  </div>
-			   <div class="modal-body" id="afterAvatar" style="display: none;"></div>
-			   <form class="form-horizontal" id="avatarUploadForm" method="POST" action="AvatarUpload" enctype="multipart/form-data">
-			  <div class="modal-body">
-				  <div class="control-group">
-				    <div class="controls">
-				      <input type="file" id="file" name="file">
-				    </div>
-				  </div>
-			  </div>
-			  <div class="modal-footer">
-			    <input type="submit" class="btn btn-success" id="avatarPhotoButton" value="Update Avatar &raquo;" />
-			    <center><div id="loader" style="display: none;"><img src="img/loader.gif" style="position: absolute;"/></div></center>
-			  </div>
-			  </form>
-			</div>
-		<!-- End Avatar Modal -->
-		
 		
 		
     </div> <!-- /container -->

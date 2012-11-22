@@ -81,6 +81,7 @@
               	<li><a href="user.jsp">Home</a></li>
                 <li><a href="profile">Profile</a></li>
                 <li><a href="photos">My Photos</a></li>
+                <li><a href="account.jsp">Account</a></li>
                 <li class="divider"></li>
                 <li><a href="logout">Log out!</a></li>
               </ul>
@@ -159,8 +160,13 @@
 				var obj=$.parseJSON(data);
 				
 				var like_link_full="<a href='#' id='like_btn' class='like_btn' title='Like'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
+<<<<<<< HEAD
 				var dislike_link_full="<a href='#' id='dislike_btn' class='dislike_btn' title='Dislike'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
 				
+=======
+				var dislike_link_full="<a href='#' id='dislike_btn' class='dislike_btn' title='Dislike'><i class='icon-thumbs-down icon-white'> &nbsp;</i></a> ";
+				console.log(obj);
+>>>>>>> f182f6dab8a77594ab4e4e2684ab48563588324c
 				if(obj.ilike>0){
 					like_link_full="<a href='#' id='' class='like_btn' title='You like this!'><i class='icon-thumbs-up icon-white'> &nbsp;</i></a> ";
 				}

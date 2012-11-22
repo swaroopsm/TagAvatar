@@ -182,4 +182,29 @@ public class Users {
 		}
 	}
 	
+	public String update_account(String username, String opwd, String npwd){
+		String sql="SELECT `password` FROM users WHERE username='"+username+"'";
+		JSONObject json=new JSONObject();
+		try{
+			Statement st=this.con.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			int c=0;
+			while(rs.next()){
+				c++;
+			}
+			if(c>0){
+				
+				return "";
+			}else{
+				json.put("status", "error");
+				json.put("message", "Old password is incorrect!");
+				return json.toString();
+			}
+		}catch(Exception e){
+			json.put("status", "error");
+			json.put("message", e.getMessage());
+			return json.toString();
+		}
+	}
+	
 }
