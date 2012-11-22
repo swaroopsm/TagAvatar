@@ -2081,13 +2081,20 @@
 			 * TODO: Display Error Message
 			 */
 		}else{
+			$("#loader").show();
 			$.post("updateProfile", {name: name, email: email, bio: bio, url: url, location: location},
 			function(data){
 				var obj=$.parseJSON(data);
-				console.log(obj);	
+				console.log(obj);
+				if(obj.status){
+					$("#js-messages").html("<span class='span6 alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a>"+obj.message+"</span>").hide().fadeIn(300);
+				}
+				else{
+					$("#js-messages").html("<span class='span6 alert alert-danger'><a href='#' class='close' data-dismiss='alert'>&times;</a>"+obj.message+"</span>").hide().fadeIn(300);
+				}
 			});
 		}
-		
+		$("#loader").fadeOut(500);
 		return false;
 	});
 
