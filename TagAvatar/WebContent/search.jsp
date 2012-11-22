@@ -31,7 +31,7 @@
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
   </head>
 
-  <body class="body_background">
+  <body class="body_background" style='overflow-y: scroll;'>
     <%
 		try{
 			if(session.getAttribute("loggedin").toString().equals("true")){
@@ -108,6 +108,9 @@
 	}
 		$(document).ready(function(){
 			var queryString=document.URL.split("?")[1].split("=")[1];
+			var last_char=(queryString.substring(queryString.length-1,queryString.length));
+			if(last_char=='#')
+				queryString=queryString.substring(0,queryString.length-1);
 			
 			// get photos via ajax and display them
 			$.post("searchPhotos", {title:queryString}, function(data){
@@ -115,7 +118,7 @@
 				console.log(obj);
 				$("#photoContainer").html("<legend> Search results for '"+queryString+"' </legend>");
 				for(var i=0;i<obj.length;i++)					
-					$("#photoContainer").append("<a href='#'><img class = 'thumbnail' style='display:block;float:left;margin-right:20px;margin-bottom:10px;max-width: 180px;min-height: 140px;max-height: 140px;' id='searchImg' src='/images/thumbnails/"+obj[i].photo+"'/></a>").hide();
+					$("#photoContainer").append("<a href='#' class='searched_img'><img class = 'thumbnail' style='display:block;float:left;margin-right:20px;margin-bottom:10px;max-width: 180px;min-height: 140px;max-height: 140px;' id='searchImg' src='/images/thumbnails/"+obj[i].photo+"'/></a>").hide();
 				$("#photoContainer").fadeIn(300);
 			});
 			
@@ -128,7 +131,19 @@
 				
 			});	
 			
+			$(".searched_img").live("mouseover", function(){
+				var a=($(this).children()[0]);
+				$(a).css({
+					zoom: '120%'
+				});
+			});
 			
+			$(".searched_img").live("mouseout", function(){
+				var a=($(this).children()[0]);
+				$(a).css({
+					zoom: '100%'
+				});
+			});
 			
 		});
 	</script>
