@@ -107,7 +107,7 @@ public class Users {
 				st.executeUpdate(sql);
 				json.put("status", true);
 				json.put("message", "User added successfully. Login to continue...");
-				return "";
+				return json.toString();
 			}
 		}catch(SQLException e){
 			return e.getMessage();
