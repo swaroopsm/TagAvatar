@@ -2038,8 +2038,14 @@
 		}else{
 			$("#loader").show();
 			$.post("/TagAvatar/signup", {name: name, email: email, username: username, password: pwd},
-					function(data){
-				$("#js-messages").html("<br><center><span style='margin-left: 25%;' class='span5 alert alert-success'><a class='close' data-dismiss='alert' href='#'>&times;</a>"+data+"</span></center>").hide().fadeIn(500);
+				function(data){
+				var obj=$.parseJSON(data);
+				if(obj.status){
+					$("#js-messages").html("<br><center><span style='margin-left: 25%;' class='span5 alert alert-success'><a class='close' data-dismiss='alert' href='#'>&times;</a>"+obj.message+"</span></center>").hide().fadeIn(500);
+				}
+				else{
+					$("#js-messages").html("<br><center><span style='margin-left: 25%;' class='span5 alert alert-danger'><a class='close' data-dismiss='alert' href='#'>&times;</a>"+obj.message+"</span></center>").hide().fadeIn(500);
+				}
 			});
 		}
 		$("#loader").fadeOut(300);
@@ -2178,4 +2184,3 @@ return false;
 		$("#loader").fadeOut(500);
 		return false;
 	});
-	
