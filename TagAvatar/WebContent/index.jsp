@@ -57,7 +57,11 @@
 
     <div class="container">
 
-      <h1>Intro....</h1>
+      	<section id="photos">
+
+		
+	
+		</section>
 
     </div> <!-- /container -->
 
@@ -73,7 +77,8 @@
 				/**
 				** TODO: Arun, you need to display the photos on main page.. obj consists of the json array!!
 				*/
-				
+				for (var i=0;i<obj.length;i++)
+					$("#photos").append("<div id='hmeImg'><img class='thumbnail' src='/images/thumbnails/"+obj[i].photo+"' /><div style='//position:relative;'>"+obj[i].title+"</div></div>");
 				console.log(obj);
 			});
 		});
