@@ -80,18 +80,35 @@ public class Users {
 	}
 	
 	public String create(String name, String email, String username, String password){
+		JSONObject json=new JSONObject();
 		try{
-			MessageDigest digest = MessageDigest.getInstance("MD5");
-	        
-	        //Update input string in message digest
-	        digest.update(password.getBytes(), 0, password.length());
-	 
-	        //Converts message digest value in base 16 (hex) 
-	        password = new BigInteger(1, digest.digest()).toString(16);
-			String sql="INSERT INTO users(name,email,username,password,bio,url,location) VALUES('"+name+"','"+email+"','"+username+"','"+password+"','','','')";
-			Statement st=this.con.createStatement();
-			st.executeUpdate(sql);
-			return "User added successfully!";
+			int c=0;
+			String sql2="SELECT * FROM users WHERE username='"+username+"'";
+			Statement st2=this.con.createStatement();
+			ResultSet rs2=st2.executeQuery(sql2);
+			while(rs2.next()){
+				c++;
+			}
+			if(c>0){
+				json.put("status", false);
+				json.put("message", "Username already exists");
+				return json.toString();
+			}
+			else{
+				MessageDigest digest = MessageDigest.getInstance("MD5");
+		        
+		        //Update input string in message digest
+		        digest.update(password.getBytes(), 0, password.length());
+		 
+		        //Converts message digest value in base 16 (hex) 
+		        password = new BigInteger(1, digest.digest()).toString(16);
+				String sql="INSERT INTO users(name,email,username,password,bio,url,location) VALUES('"+name+"','"+email+"','"+username+"','"+password+"','','','')";
+				Statement st=this.con.createStatement();
+				st.executeUpdate(sql);
+				json.put("status", true);
+				json.put("message", "User added successfully. Login to continue...");
+				return json.toString();
+			}
 		}catch(SQLException e){
 			return e.getMessage();
 		}catch(NoSuchAlgorithmException e2){
