@@ -5849,3 +5849,9 @@ a.dislike_btn{
   column-count:         1;
   }
 }
+
+
+/* custom styling for black thumbnails*/
+.black-thumbnail{
+	background-color:#AEAEAE;	
+}

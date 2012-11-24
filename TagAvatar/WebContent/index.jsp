@@ -78,7 +78,7 @@
 				** TODO: Arun, you need to display the photos on main page.. obj consists of the json array!!
 				*/
 				for (var i=0;i<obj.length;i++)
-					$("#photos").append("<div id='hmeImg'><img class='thumbnail' src='/images/thumbnails/"+obj[i].photo+"' /><div style='//position:relative;'>"+obj[i].title+"</div></div>");
+					$("#photos").append("<div id='hmeImg' style='margin-right:15px; margin-bottom:15px;'><img class='thumbnail black-thumbnail' src='/images/thumbnails/"+obj[i].photo+"' /></div>");
 				console.log(obj);
 			});
 		});
