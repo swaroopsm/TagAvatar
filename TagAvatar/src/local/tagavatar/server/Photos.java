@@ -32,8 +32,10 @@ public class Photos {
 	}
 	
 	public String user_photos(String username){
-		String sql="SELECT `title`,`desc`,`photo` FROM photos WHERE user_id='"+username+"' ORDER BY id DESC";
+		String sql="SELECT `id`,`title`,`desc`,`photo` FROM photos WHERE user_id='"+username+"' ORDER BY id DESC";
 		try{
+			Likes l=new Likes();
+			Dislikes d=new Dislikes();
 			Statement st=this.con.createStatement();
 			ResultSet rs=st.executeQuery(sql);
 			JSONArray json2=new JSONArray();
@@ -44,6 +46,8 @@ public class Photos {
 				json.put("title", rs.getString("title"));
 				json.put("desc", rs.getString("desc"));
 				json.put("photo", rs.getString("photo"));
+				json.put("likes", l.get_likes(rs.getInt("id")));
+				json.put("dislikes", d.get_dislikes(rs.getInt("id")));
 				json2.put(json);
 			}
 			return json2.toString();
