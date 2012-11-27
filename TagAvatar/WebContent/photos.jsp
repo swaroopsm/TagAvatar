@@ -197,7 +197,7 @@ $(".items img").live("click", function() {
 	$("#p_title_bg").html('');
 	$("#img_title").html($(this).attr("data-title")).hide().fadeIn(500);
 	$("#image_wrap").prepend('<span id="p_title_bg" class="title_bg">!</span>');
-	$("#image_wrap").prepend('<span id="ph_title" style="padding-top: 10px;padding-left: 6px;font-family: Trebuchet MS;position: absolute;opacity: 1;color: #fff;">'+p_title+'&nbsp;&nbsp;<span style="font-size: 18px;position: absolute;padding-top: 4px;"><i class="icon-thumbs-up icon-white"></i> </span>&nbsp;&nbsp;&nbsp;&nbsp;'+$(this).attr('data-likes')+'&nbsp;&nbsp; <span style="font-size: 18px;position: absolute;padding-top: 2px;"><i class="icon-thumbs-down icon-white"></i> </span>&nbsp;&nbsp;&nbsp;&nbsp;'+$(this).attr('data-dislikes')+'</span>');
+	$("#image_wrap").prepend('<span id="ph_title" style="padding-top: 10px;padding-left: 6px;font-family: Trebuchet MS;position: absolute;opacity: 1;color: #fff;">'+p_title+'&nbsp; - &nbsp;<span style="font-size: 18px;position: absolute;padding-top: 4px;"><i class="icon-thumbs-up icon-white"></i> </span>&nbsp;&nbsp;&nbsp;&nbsp;'+$(this).attr('data-likes')+'&nbsp;&nbsp; <span style="font-size: 18px;position: absolute;padding-top: 2px;"><i class="icon-thumbs-down icon-white"></i> </span>&nbsp;&nbsp;&nbsp;&nbsp;'+$(this).attr('data-dislikes')+'</span>');
 	// begin loading the image from www.flickr.com
 	img.src = url;
 
