@@ -17,7 +17,7 @@
   <!-- standalone page styling (can be removed) -->
   <link rel="stylesheet" type="text/css" href="css/scrollable.css" />
 <link rel="stylesheet" type="text/css" href="css/scroll-buttons.css" />
-
+<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
 <style>
   /* styling for the image wrapper  */
 #image_wrap {
@@ -71,6 +71,44 @@ a.home_link:hover{
 	height: 40px;
 }
 
+[class^="icon-"],
+[class*=" icon-"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+  background-image: url("img/glyphicons-halflings.png");
+  background-position: 14px 14px;
+  background-repeat: no-repeat;
+}
+
+.icon-white,
+.nav-tabs > .active > a > [class^="icon-"],
+.nav-tabs > .active > a > [class*=" icon-"],
+.nav-pills > .active > a > [class^="icon-"],
+.nav-pills > .active > a > [class*=" icon-"],
+.nav-list > .active > a > [class^="icon-"],
+.nav-list > .active > a > [class*=" icon-"],
+.navbar-inverse .nav > .active > a > [class^="icon-"],
+.navbar-inverse .nav > .active > a > [class*=" icon-"],
+.dropdown-menu > li > a:hover > [class^="icon-"],
+.dropdown-menu > li > a:hover > [class*=" icon-"],
+.dropdown-menu > .active > a > [class^="icon-"],
+.dropdown-menu > .active > a > [class*=" icon-"] {
+  background-image: url("../img/glyphicons-halflings-white.png");
+}
+
+.icon-thumbs-up {
+  background-position: -96px -144px;
+}
+
+.icon-thumbs-down {
+  background-position: -120px -144px;
+}
+
 </style>
 </head>
 <body style="overflow-x: hidden;background: #000; //width: 980px; //margin: 0px auto;"><!-- wrapper element for the large image -->
@@ -115,7 +153,7 @@ $(function() {
 		var t=8,z=0;
 		for(var i=0;i<obj.length;i++){
 			if(i<t){
-				$("#group"+z).append("<a href='#'><img src='/images/thumbnails/"+obj[i].photo+"' data-large='/images/"+obj[i].photo+"' data-title='"+obj[i].title+"'></img></a>");
+				$("#group"+z).append("<a href='#'><img src='/images/thumbnails/"+obj[i].photo+"' data-large='/images/"+obj[i].photo+"' data-title='"+obj[i].title+"' data-likes='"+obj[i].likes+"' data-dislikes='"+obj[i].dislikes+"'></img></a>");
 			}
 			else{
 				i--;
@@ -159,7 +197,7 @@ $(".items img").live("click", function() {
 	$("#p_title_bg").html('');
 	$("#img_title").html($(this).attr("data-title")).hide().fadeIn(500);
 	$("#image_wrap").prepend('<span id="p_title_bg" class="title_bg">!</span>');
-	$("#image_wrap").prepend('<span id="ph_title" style="padding-top: 10px;padding-left: 6px;font-family: Trebuchet MS;position: absolute;opacity: 1;color: #fff;">'+p_title+'</span>');
+	$("#image_wrap").prepend('<span id="ph_title" style="padding-top: 10px;padding-left: 6px;font-family: Trebuchet MS;position: absolute;opacity: 1;color: #fff;">'+p_title+'&nbsp;&nbsp;<span style="font-size: 18px;position: absolute;padding-top: 4px;"><i class="icon-thumbs-up icon-white"></i> </span>&nbsp;&nbsp;&nbsp;&nbsp;'+$(this).attr('data-likes')+'&nbsp;&nbsp; <span style="font-size: 18px;position: absolute;padding-top: 2px;"><i class="icon-thumbs-down icon-white"></i> </span>&nbsp;&nbsp;&nbsp;&nbsp;'+$(this).attr('data-dislikes')+'</span>');
 	// begin loading the image from www.flickr.com
 	img.src = url;
 
